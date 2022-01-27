@@ -1,0 +1,27 @@
+{% trans_default_domain 'App' %}
+{% extends "admin/base-admin.html.twig" %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block title %}{{'general.administration'|trans}} | {{'general.add'|trans}} {{'repertoire.repertoire'|trans}}{% endblock %}
+{% block body %}
+    <h1> {{'general.add'|trans}} {{'repertoire.repertoire'|trans}}</h1>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'row g-3'}}) }}
+    <div class="col-12">
+        {{ form_label(form.title) }}
+        {{ form_errors(form.title) }}
+        {{ form_widget(form.title) }}
+    </div>
+    <div class="col-12">
+        {{ form_label(form.description) }}
+        {{ form_errors(form.description) }}
+        {{ form_widget(form.description) }}
+    </div>
+    <div class="col-12">
+        {{ form_label(form.active) }}
+        {{ form_errors(form.active) }}
+        {{ form_widget(form.active) }}
+    </div>
+    <div class="col-12">
+        {{ form_widget(form.save) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

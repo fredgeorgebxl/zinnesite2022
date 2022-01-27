@@ -1,0 +1,58 @@
+website:
+    title: 'Zinnechœur - Chorale à Bruxelles'
+    description: 'Zinnechœur est une chorale bruxelloise au répertoire éclectique. Nous répétons à Ixelles le lundi soir.'
+    slogan: 'Zinnechœur, la chorale bruxelloise qui a du chien !'
+    discoverthechoir: 'Découvrez la chorale'
+    homebtn:
+        choristes: 'Découvrez les choristes'
+        repertoire: 'Découvrez notre répertoire'
+        contact: 'Contactez-nous !'
+        joinus: 'Nous rejoindre !'
+    agenda: 'Agenda'
+    agenda-viewmore: 'Voir en détail'
+    repertoire: 'Répertoire'
+    oldrepertoire: 'Ancien répertoire'
+    membres: 'Membres'
+    photos: 'Photos'
+    videos: 'Vidéos'
+    contact: 'Contact'
+    joinus: 'Nous rejoindre'
+    eventpictures: "Photos de l'événement"
+    contactform:
+        name: 'Nom'
+        email: 'Adresse e-mail'
+        subject: 'Sujet'
+        message: 'Message'
+        send: 'Envoyer'
+        sendconfirm: 'Le message a bien été envoyé ! Merci !'
+        senderror: "Une erreur est survenue lors de l'envoi du message... Désolé"
+    nextevents: 'Prochains concerts'
+    pastevents: 'Concerts passés'
+    season: 'Saison'
+    chef: ', chef de chœur'
+    choristes: 'Choristes'
+    sopr: 'Soprane'
+    teno: 'Ténor'
+    bass: 'Basse'
+    alto: 'Alto'
+    viewmore: 'Voir toutes les images'
+    hp-presentation-title: 'Zinnechœur, la chorale bruxelloise qui a du chien !'
+    hp-repertoire-title: 'Un répertoire éclectique'
+    hp-images-title: 'Zinnechœur en images'
+    hp-video-description: >
+        <p>Allez voir toutes nos vidéos sur notre chaîne <a href="https://www.youtube.com/channel/UC_tp-m7g0eqs0IwxhA1k9mA" target="_blank">YouTube</a></p>
+    hp-images-description: >
+        <p>Retrouvez l'ensemble de nos galeries photos <a href="./photos">ici</a></p>
+    hp-contact-title: "N'attendez plus !"
+    hp-contact-content: >
+        <p>Si vous voulez que nous chantions lors de l'un de vos événements, si vous désirez nous rejoindre, ou que vous avez une question particulière, n'hésitez pas !</p>
+    joinus-title: 'Rejoindre Zinnechœur'
+    page-not-found: 'Contenu inexistant'
+    error: 'Erreur'
+    page-not-found-description: >
+        Cette page n'existe pas (ou n'existe plus). N'hésitez pas à aller voir le reste du site.<br />
+        Zinnechœur vous souhaite %souhaite%
+    journee: 'une bonne journée'
+    nuit: 'une bonne nuit'
+    week-end: 'un bon week-end'
+    

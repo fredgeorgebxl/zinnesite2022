@@ -1,0 +1,25 @@
+{% trans_default_domain 'App' %}
+{% macro publishButton(class, id, published) %}
+    <a class="btn-sm{% if published == 1 %}  btn-outline-success{% else %} btn-outline-danger{% endif %}" href="{{ path('switchpublish', {'entity':class, 'ent_id':id}) }}"><span class="{% if published == 1 %}fas fa-check-circle{% else %}fas fa-minus-circle{% endif %}" aria-hidden="true"></span></a>
+{% endmacro %}
+{% macro editButton(class, id) %}
+    <a class="btn-sm btn-primary" href="{{ path( class~'_edit', {'ent_id':id}) }}"><span class="far fa-edit" aria-hidden="true"></span> {{ 'general.edit'|trans}}</a>
+{% endmacro %}
+{% macro deleteButton(class, id) %}
+    <a class="btn-sm btn-danger deletelink" href="{{ path( class~'_delete', {'ent_id':id}) }}"><span class="far fa-trash-alt" aria-hidden="true"></span> {{ 'general.delete'|trans}}</a>
+{% endmacro %}
+{% macro dateRange(date1, date2) %}
+    {% if (date2 is defined and date2 is not null) and date1 != date2 %}
+        {% if date1|date('Y') == date2|date('Y') %}
+            {% if date1|date('m') == date2|date('m') %}
+                {{ date1|date('d') }} &gt; {{ date2|date('d/m/Y') }}
+            {% else %}
+                 {{ date1|date('d/m') }} &gt; {{ date2|date('d/m/Y') }}
+            {% endif %}
+        {% else %}
+            {{ date1|date('d/m/Y') }} &gt; {{ date2|date('d/m/Y') }}
+        {% endif %}
+    {% else %}
+        {{ date1|date('d/m/Y') }}
+    {% endif %}
+{% endmacro %}

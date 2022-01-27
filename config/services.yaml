@@ -4,6 +4,9 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    images_directory_rel: '/uploads/images'
+    images_directory: '%kernel.project_dir%/public%images_directory_rel%'
+    publishable_entities: [event, gallery, repertoire, video, textblock]
 
 services:
     # default configuration for services in *this* file
@@ -23,3 +26,14 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%images_directory%'
+
+    App\Menu\Builder:
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu_builder, method: adminMenu, alias: admin }
+
+    App\Service\ImageManager:
+        arguments:

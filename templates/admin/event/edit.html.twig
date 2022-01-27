@@ -1,0 +1,43 @@
+{% trans_default_domain 'App' %}
+{% extends "admin/base-admin.html.twig" %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+    <h1> {{ 'general.edit'|trans }} '{{ form.name.vars.value }}'</h1>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_row(form._token) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.season) }}
+        {{ form_row(form.date) }}
+    <div class="form-group">
+        {{ form_label(form.description) }}
+        {{ form_errors(form.description) }}
+        {{ form_widget(form.description) }}
+    </div>
+        {{ form_row(form.location) }}
+        {# form_row(form.gallery) #}
+        <fieldset>
+            <legend>{{ form_label(form.picture) }}</legend>
+            {% if picture %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <img src="{{ asset(images_directory ~ picture.path) | imagine_filter('site_image_medium') }}" class="img-fluid"  />
+                </div>
+            </div>
+            {% endif %}
+                    {{ form_label(form.picture.file) }}
+                    {{ form_errors(form.picture.file) }}
+                <div class="input-group">
+                    {{ form_widget(form.picture.file) }}
+                {% if form.picture.add_image is defined %}
+                    {{ form_widget(form.picture.add_image, {'attr': {'class': 'btn btn-outline-secondary'}}) }}
+                {% endif %}
+                {% if form.picture.remove_image is defined %}
+                    {{ form_widget(form.picture.remove_image, {'attr': {'class': 'btn btn-outline-danger'}}) }}
+                {% endif %}
+                </div>
+            {{ form_row(form.picture.title) }}
+            {{ form_row(form.picture.alt) }}
+        </fieldset>
+        {{ form_row(form.save) }}
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

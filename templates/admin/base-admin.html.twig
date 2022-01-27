@@ -1,0 +1,52 @@
+{% trans_default_domain 'App' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{{ 'general.administration'|trans}}{% endblock %}</title>
+        {% block stylesheets %} {{ encore_entry_link_tags('admin') }} {% endblock %}
+        {% block javascripts %} {{ encore_entry_script_tags('admin') }} {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        {% block header %}
+        <header class="p-3 mb-3 border-bottom">
+            <nav class="navbar navbar-expand-sm navbar-light" aria-label="Admin Navbar">
+            <div class="container">
+            <a class="navbar-brand" href="{{ path('admin_home') }}">{{ 'general.administration'|trans}}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                <div class="collapse navbar-collapse" id="adminNavbar">
+                   {% if is_granted('ROLE_USER') %}
+                    {{ knp_menu_render('admin',{'currentClass' : 'active'}) }}
+                   {% endif %}
+                </div>
+                {% if is_granted('ROLE_USER') %}
+                <div class="user-info navbar-right">
+                    <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                        <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="fa fa-user"></span> {{ app.user.firstname }} {{ app.user.lastname }}</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a href="{{ logout_path('main') }}" class="dropdown-item" >{{ 'general.logout'|trans }}</a></li>
+                                <li><a href="{{ path('app_change_password') }}" class="dropdown-item" >{{ 'security.change-password'|trans }}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+            </nav>
+        </header>
+        {% endblock %}
+        <div class="container">
+        {% block body %}{% endblock %}
+        </div>
+    </body>
+</html>

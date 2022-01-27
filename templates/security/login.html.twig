@@ -1,0 +1,39 @@
+{% trans_default_domain 'App' %}
+{% extends "admin/base-admin.html.twig" %}
+{% block title %}{{ 'general.administration'|trans}} | {{'security.login.login'|trans}}{% endblock %}
+
+{% block body %}
+<h1>{{'security.login.login'|trans}}</h1>
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            {{ 'security.connected-as'|trans }} {{ app.user.firstname ~ ' ' ~ app.user.lastname }}, <a href="{{ path('app_logout') }}">{{ 'general.logout'|trans }}</a>
+        </div>
+    {% endif %}
+    <div class="mb-3">
+        <label for="inputId">{{'security.login.username'|trans}}</label>
+        <input type="text" value="{{ last_username }}" name="email" id="inputId" class="form-control" autocomplete="username" required autofocus>
+    </div>
+    <div class="mb-3">
+        <label for="inputPassword">{{'security.login.password'|trans}}</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    </div>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" name="_remember_me">&nbsp;{{ 'security.login.remember_me'|trans }}
+        </label>
+    </div>
+
+    
+    <button class="btn btn-lg btn-primary" type="submit">{{'security.login.submit'|trans}}</button>
+</form>
+{% endblock %}
