@@ -18,6 +18,7 @@ class VideoController extends AbstractController
 {
     /**
      * @Route("/", name="video_list")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(): Response
     {

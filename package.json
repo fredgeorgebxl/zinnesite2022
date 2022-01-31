@@ -14,6 +14,7 @@
     "bootstrap-icons": "^1.5.0",
     "core-js": "^3.18.3",
     "cropperjs": "^1.5.12",
+    "dropzone": "^6.0.0-beta.2",
     "jquery-confirm": "^3.3.4",
     "jquery-cropper": "^1.0.1",
     "postcss-loader": "^6.1.1",

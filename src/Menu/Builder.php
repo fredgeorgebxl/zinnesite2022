@@ -32,12 +32,13 @@ class Builder
                 $menu->addChild('videos.videos', array('route' => 'video_list'))
                         ->setExtra('translation_domain', 'App');
 
+                $menu->addChild('gallery.galleries', array('route' => 'gallery_list'))
+                        ->setExtra('translation_domain', 'App');
+
                 if ($this->security->isGranted('ROLE_SUPER_ADMIN')) {
                         $menu->addChild('users.users', array('route' => 'user_list'));
                 }
                 /*
-                $menu->addChild('gallery.galleries', array('route' => 'gallery_list'))
-                        ->setExtra('translation_domain', 'App');
                 
                 $menu->addChild('textblock.textblocks', array('route' => 'textblock_list'))
                         ->setExtra('translation_domain', 'App');

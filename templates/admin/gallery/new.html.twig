@@ -1,0 +1,16 @@
+{% trans_default_domain 'App' %}
+{% extends "admin/base-admin.html.twig" %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block title %}{{'general.administration'|trans}} | {{'general.add'|trans}} {{'gallery.gallery'|trans}}{% endblock %}
+{% block body %}
+    <h1>{{'general.add'|trans}} {{'gallery.gallery'|trans}}</h1>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_row(form._token) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.date) }}
+        {{ form_row(form.dateto) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.addimages, {'attr': {'class': 'btn btn-outline-secondary'}}) }}
+        {{ form_row(form.save) }}
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

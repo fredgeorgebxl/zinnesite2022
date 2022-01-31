@@ -68,6 +68,12 @@ class Image
      */
     private $event;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Gallery", inversedBy="pictures")
+     * @ORM\JoinColumn(name="gallery_id", referencedColumnName="id", nullable=true)
+     */
+    protected $gallery = null;
+
 
     public function getId(): ?int
     {
@@ -225,6 +231,30 @@ class Image
         $this->event = $event;
 
         return $this;
+    }
+
+    /**
+     * Set gallery
+     *
+     * @param \App\Entity\Gallery $gallery
+     *
+     * @return ResponsiveImage
+     */
+    public function setGallery(\App\Entity\Gallery $gallery = null)
+    {
+        $this->gallery = $gallery;
+
+        return $this;
+    }
+
+    /**
+     * Get gallery
+     *
+     * @return \App\Entity\Gallery
+     */
+    public function getGallery()
+    {
+        return $this->gallery;
     }
 
 }

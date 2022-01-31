@@ -9,6 +9,7 @@
 import './admin_styles/admin-style.scss';
 import '../node_modules/jquery-confirm/css/jquery-confirm.css';
 import '../node_modules/cropperjs/src/css/cropper.scss';
+import '../node_modules/dropzone/dist/dropzone.css';
 import './admin_styles/bootstrap-datepicker.css';
 require('bootstrap');
 
@@ -17,6 +18,18 @@ global.$ = global.jQuery = $;
 require('jquery-confirm');
 require('cropperjs');
 require('jquery-cropper');
+const { Dropzone } = require('dropzone');
+const dropzone = new Dropzone("#mydropzone", { 
+    url: "/file/post", 
+    paramName: "form[file]",
+    dictDefaultMessage: "Glissez vos fichiers ici",
+    processing: function(file){
+        $('#form_edit_gallery').prop('disabled', true);
+    },
+    queuecomplete: function(){
+        $('#form_edit_images').css('visibility', 'visible');
+        $('#form_edit_gallery').prop('disabled', false);
+    }});
 import './bootstrap-datepicker.js';
 import './bootstrap-datepicker.fr.min.js';
 
