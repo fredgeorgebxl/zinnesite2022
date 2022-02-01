@@ -15,6 +15,12 @@ liip_imagine:
             filters :
                 scale:
                     dim: [ 600, 600 ]
+        admin_thumbnail_square:
+            filters:
+                thumbnail:
+                    size:          [150, 150]
+                    mode:          outbound
+                    allow_upscale: true
         site_image_medium :
             quality : 85
             filters :

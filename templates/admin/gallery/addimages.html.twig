@@ -4,11 +4,9 @@
 {% block title %}{{'general.administration'|trans}} | {{ "gallery.addimagesto"|trans }} '{{ gallery.title }}'{% endblock %}
 {% block body %}
     <h1>{{ "gallery.addimagesto"|trans }} '{{ gallery.title }}'</h1>
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-        <div id="mydropzone" class="dropzone mb-3">
-            <div class="fallback">
-                {{ form_row(form.file) }}
-            </div>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': 'mydropzone', 'class': 'dropzone'}}) }}
+        <div class="fallback">
+            {{ form_row(form.file) }}
         </div>
         <div class="form-buttons">
             {{ form_widget(form.edit_gallery, {'attr': {'id': 'form_edit_gallery', 'class': 'btn btn-outline-secondary'}}) }}

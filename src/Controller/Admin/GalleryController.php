@@ -14,6 +14,7 @@ use App\Entity\Image;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("admin/gallery")
@@ -97,6 +98,7 @@ class GalleryController extends AbstractController
         
         return $this->render('admin/gallery/edit.html.twig', array(
             'form' => $form->createView(),
+            'images' => $gallery->getPictures(),
         ));
     }
 
@@ -104,7 +106,7 @@ class GalleryController extends AbstractController
      * @Route("/addimages/{ent_id}", requirements={"ent_id" = "\d+"}, name="gallery_addimages")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function addfileAction($ent_id, Request $request){
+    public function addfileAction($ent_id, Request $request, ImageManager $imageManager){
         
         $em = $this->getDoctrine()->getManager();
         $gallery = $em->getRepository(Gallery::class)->find($ent_id);
@@ -138,32 +140,27 @@ class GalleryController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             
             // Upload picture
-            /*
-            $data = $form->getData();
-            $file = $data["file"];
+
+            $file = $request->files->get('file');
+
             if($file){
-                $picture = new Image();
-                $picture->setPath('');
-                $em->persist($picture);
-                $picture->setFile($file);
+                $picture = $imageManager->initPicture(null, null, null);
                 $picture->setGallery($gallery);
                 try{
-                    $this->get('responsive_image.uploader')->upload($picture);
+                    $imageManager->setFileToPicture($file, $picture);
                 }catch(Exception $e){
                     return new JsonResponse(['error' => $e->getMessage()]);
                 }
+                $em->persist($picture);
                 $em->flush();
                 return new JsonResponse(['success' => true]);
             }
-            */
+
             if($form->has('edit_gallery') && $form->get('edit_gallery')->isClicked()){
                 return $this->redirectToRoute('gallery_edit', ['ent_id' => $ent_id]);
             }
             if($form->get('edit_images')->isClicked()){
                 return $this->redirectToRoute('gallery_editimages', ['ent_id' => $ent_id]);
-            }
-            if($form->has('back_home') && $form->get('back_home')->isClicked()){
-                return $this->redirectToRoute('admin_home');
             }
         }
         

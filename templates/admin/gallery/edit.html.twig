@@ -10,13 +10,13 @@
         {{ form_row(form.dateto) }}
         {{ form_row(form.description) }}
         <div class="form-group">
-            <div class="clearfix gallery">
-                {# for key, image in images %}
-                    {{ styled_image(image, 'thumb') }}
-                {% endfor #}
+            <div class="clearfix gallery mb-3">
+                {% for key, image in images %}
+                    <img src="{{ asset(images_directory ~ image.path) | imagine_filter('admin_thumbnail_square') }}" class="img-thumbnail" />
+                {% endfor %}
             </div>
         </div>
-        <div class="form-group mb-3">{{ form_widget(form.addimages, {'attr': {'class': 'btn btn-outline-secondary'}}) }} {# if images|length %}{{ form_widget(form.edit_images) }}{% endif #}</div>
+        <div class="form-group mb-3">{{ form_widget(form.addimages, {'attr': {'class': 'btn btn-outline-secondary'}}) }} {% if images|length %}{{ form_widget(form.edit_images, {'attr': {'class': 'btn btn-outline-secondary'}}) }}{% endif %}</div>
         {{ form_row(form.save) }}
     {{ form_end(form, {'render_rest': false}) }}
 {% endblock %}

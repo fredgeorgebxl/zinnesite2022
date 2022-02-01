@@ -19,17 +19,6 @@ require('jquery-confirm');
 require('cropperjs');
 require('jquery-cropper');
 const { Dropzone } = require('dropzone');
-const dropzone = new Dropzone("#mydropzone", { 
-    url: "/file/post", 
-    paramName: "form[file]",
-    dictDefaultMessage: "Glissez vos fichiers ici",
-    processing: function(file){
-        $('#form_edit_gallery').prop('disabled', true);
-    },
-    queuecomplete: function(){
-        $('#form_edit_images').css('visibility', 'visible');
-        $('#form_edit_gallery').prop('disabled', false);
-    }});
 import './bootstrap-datepicker.js';
 import './bootstrap-datepicker.fr.min.js';
 
@@ -61,6 +50,19 @@ $(document).ready(function(){
         language: "fr",
         weekStart: 1
     });
+    if($("#mydropzone").length){
+        const dropzone = new Dropzone("#mydropzone", { 
+            paramName: "file",
+            dictDefaultMessage: "Glissez vos fichiers ici",
+            processing: function(file){
+                $('#form_edit_gallery').prop('disabled', true);
+            },
+            queuecomplete: function(){
+                $('#form_edit_images').css('visibility', 'visible');
+                $('#form_edit_gallery').prop('disabled', false);
+            }});
+    }
+    
     var $cropzone = $('#cropzone');
     var $coordinations = $('.crop-coordinations');
     var $ratio = $('#cropper_ratio');
