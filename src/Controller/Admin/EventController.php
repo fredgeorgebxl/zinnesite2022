@@ -43,12 +43,13 @@ class EventController extends AbstractController
         $event = new Event();
         $event->setPublished(TRUE);
 
-        $form = $this->createForm(EventType::class,$event);
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(EventType::class,$event, ['entity_manager' => $em]);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
             $event = $form->getData();
-            $em = $this->getDoctrine()->getManager();
 
             // Upload picture
             $file = $form->get('picture')->get('file')->getData();
@@ -91,7 +92,7 @@ class EventController extends AbstractController
         /*
         $zinneparams = $this->getParameter('zinne');
         */
-        $form = $this->createForm(EventType::class,$event);
+        $form = $this->createForm(EventType::class,$event, ['entity_manager' => $em]);
         $form->handleRequest($request);
         $picture = $event->getPicture();
         

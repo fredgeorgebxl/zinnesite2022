@@ -53,6 +53,7 @@ $(document).ready(function(){
     if($("#mydropzone").length){
         const dropzone = new Dropzone("#mydropzone", { 
             paramName: "file",
+            maxFilesize: 5,
             dictDefaultMessage: "Glissez vos fichiers ici",
             processing: function(file){
                 $('#form_edit_gallery').prop('disabled', true);

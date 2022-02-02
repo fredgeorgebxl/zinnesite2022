@@ -28,7 +28,7 @@ class GalleryController extends AbstractController
     public function index(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Gallery::class);
-        $galleries = $repository->findBy([], ['datecreated' => 'desc']);
+        $galleries = $repository->findBy([], ['date' => 'desc']);
 
         return $this->render('admin/gallery/index.html.twig', [
             'controller_name' => 'GalleryController',
