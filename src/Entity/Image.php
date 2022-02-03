@@ -46,6 +46,11 @@ class Image
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
+    private $size;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
     private $weight;
 
     /**
@@ -140,6 +145,18 @@ class Image
         return $this;
     }
 
+    public function getSize(): ?int
+    {
+        return $this->size;
+    }
+
+    public function setSize(?int $size): self
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
     public function getWeight(): ?int
     {
         return $this->weight;
@@ -203,7 +220,7 @@ class Image
     function setFile(\Symfony\Component\HttpFoundation\File\File $file, \App\Service\FileUploader $fileUploader){
         $imageFile = $fileUploader->upload($file);
         $this->setPath($imageFile['name']);
-        $this->setWeight($imageFile['size']);
+        $this->setSize($imageFile['size']);
         $this->setWidth($imageFile['width']);
         $this->setHeight($imageFile['height']);
         $this->setCreated(new \DateTime());

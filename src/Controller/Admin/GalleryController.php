@@ -9,12 +9,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Entity\Gallery;
 use App\Form\Type\GalleryType;
+use App\Form\Type\GalleryImageType;
 use App\Service\ImageManager;
 use App\Entity\Image;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Route("admin/gallery")
@@ -175,7 +179,7 @@ class GalleryController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      */
     public function editimagesAction($ent_id, Request $request){
-        /*
+        
         $em = $this->getDoctrine()->getManager();
         $gallery = $em->getRepository(Gallery::class)->find($ent_id);
         
@@ -184,6 +188,7 @@ class GalleryController extends AbstractController
                 'No gallery found for id '.$ent_id
             );
         }
+        
         $form = $this->createFormBuilder($gallery)
                 ->add('title', HiddenType::class)
                 ->add('pictures', CollectionType::class, array('error_bubbling' => FALSE, 'allow_delete' => true, 'entry_type' => GalleryImageType::class, 'entry_options' => array('attr' => array('class' => 'image-box'))))
@@ -195,7 +200,7 @@ class GalleryController extends AbstractController
         foreach ($gallery->getPictures() as $image) {
             $originalImages->add($image);
         }
-        
+        /*
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()){
@@ -217,13 +222,12 @@ class GalleryController extends AbstractController
                 return $this->redirectToRoute('gallery_edit', ['ent_id' => $ent_id]);
             }
         }
-        
+        */
         return $this->render('admin/gallery/editimages.html.twig', array(
             'form' => $form->createView(),
-            'homeslide' => $gallery->getHomeslide(),
             'ent_id' => $ent_id,
         ));
-        */
+        
     }
     
     /**

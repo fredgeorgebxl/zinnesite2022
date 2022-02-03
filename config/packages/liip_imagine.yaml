@@ -26,6 +26,14 @@ liip_imagine:
             filters :
                 scale : 
                     dim: [ 800, 800 ]
+        site_gallery_preview :
+            quality : 85
+            filters :
+                crop :
+                    size: [ 768, 432 ]
+                    start: [0, 0]
+                scale:
+                    dim: [ 768, 432 ]
         site_user_square :
             quality : 85
             filters :
