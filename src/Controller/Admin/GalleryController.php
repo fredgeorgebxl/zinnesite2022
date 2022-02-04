@@ -14,6 +14,7 @@ use App\Service\ImageManager;
 use App\Entity\Image;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -178,7 +179,7 @@ class GalleryController extends AbstractController
      * @Route("/editimages/{ent_id}", requirements={"ent_id" = "\d+"}, name="gallery_editimages")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function editimagesAction($ent_id, Request $request){
+    public function editimagesAction($ent_id, Request $request, ImageManager $imageManager){
         
         $em = $this->getDoctrine()->getManager();
         $gallery = $em->getRepository(Gallery::class)->find($ent_id);
@@ -200,7 +201,7 @@ class GalleryController extends AbstractController
         foreach ($gallery->getPictures() as $image) {
             $originalImages->add($image);
         }
-        /*
+
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()){
@@ -208,7 +209,7 @@ class GalleryController extends AbstractController
             foreach ($originalImages as $image) {
                 if (false === $gallery->getPictures()->contains($image)) {
                     $gallery->removePicture($image);
-                    $this->get('responsive_image')->deleteImageFiles($image, TRUE, TRUE);
+                    $imageManager->deletePictureFiles('/images', $image);
                     $em->remove($image);
                 }
             }
@@ -216,13 +217,10 @@ class GalleryController extends AbstractController
             $em->persist($gallery);
             $em->flush();
             
-            if ($gallery->getHomeslide()){
-                return $this->redirectToRoute('admin_home');
-            } else {
-                return $this->redirectToRoute('gallery_edit', ['ent_id' => $ent_id]);
-            }
+            return $this->redirectToRoute('gallery_edit', ['ent_id' => $ent_id]);
+
         }
-        */
+
         return $this->render('admin/gallery/editimages.html.twig', array(
             'form' => $form->createView(),
             'ent_id' => $ent_id,
@@ -234,18 +232,24 @@ class GalleryController extends AbstractController
      * @Route("/cropimage/{ent_id}/{img_id}", requirements={"ent_id" = "\d+", "img_id" = "\d+"}, name="gallery_cropimage")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function cropimageAction($ent_id, $img_id, Request $request){
-        /*
-        $em = $this->getDoctrine()->getManager();
-        $image = $em->getRepository(ResponsiveImage::class)->find($img_id);
+    public function cropimageAction($ent_id, $img_id, Request $request, ImageManager $imageManager){
         
-        if (!$image) {
+        $em = $this->getDoctrine()->getManager();
+        $picture = $em->getRepository(Image::class)->find($img_id);
+        $cropConfig = [];
+        
+        if ($picture && $picture->getHeight() > 0){
+            $cropConfig = $imageManager->getFilterCroppingInfos($picture, 'site_gallery_preview');
+        }
+        
+        if (!$picture) {
             throw $this->createNotFoundException(
                 'No image found for id '.$img_id
             );
         }
-        $form = $this->createFormBuilder($image)
-                ->add('crop_coordinates', \IrishDan\ResponsiveImageBundle\Form\CropFocusType::class, array('data' => $image, 'label' => 'image.crop_focus', 'translation_domain' => 'App'))
+        
+        $form = $this->createFormBuilder($picture)
+                ->add('crop_coordinations', TextType::class, array('label' => 'image.crop', 'translation_domain' => 'App'))
                 ->add('save', SubmitType::class, array('label' => 'image.save', 'translation_domain' => 'App'))
                 ->getForm();
         
@@ -253,19 +257,18 @@ class GalleryController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()){
             
-            $this->get('responsive_image')->deleteImageFiles($image, FALSE, TRUE);
             
-            $em->persist($image);
+            $em->persist($picture);
             $em->flush();
 
             return $this->redirectToRoute('gallery_editimages', ['ent_id' => $ent_id]);
             
         }
-        
         return $this->render('admin/gallery/cropimage.html.twig', array(
             'form' => $form->createView(),
+            'picture' => $picture,
+            'crop_config' => $cropConfig,
         ));
-        */
     }
 
      /**

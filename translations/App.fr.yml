@@ -111,7 +111,7 @@ gallery:
     editimages: 'Editer les images'
     cropimages: 'Ajuster le cadrage'
     cropedit: 'Ajuster cadrage'
-    cropslideshowimages: 'Définir les zones de cadrage'
+    cropslideshowimages: 'Définir la zone de cadrage'
     alttitleedit: 'Modifier description'
     dropfileshere : 'Glissez les fichiers dans cette zone ou cliquez pour sélectionner des fichers de votre ordinateur'
     save: 'Enregistrer'

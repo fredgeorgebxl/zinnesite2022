@@ -1,0 +1,21 @@
+{% trans_default_domain 'App' %}
+{% extends "admin/base-admin.html.twig" %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block title %}{{'general.administration'|trans}} | {{ "gallery.cropslideshowimages"|trans }}{% endblock %}
+{% block body %}
+    <div class="form-group mb-3">
+        <h1>{{ "gallery.cropslideshowimages"|trans }}</h1>
+        {{ form_start(form) }}
+        <div class="row justify-content-md-center">
+            <div class="col-md-9">
+                <img src="{{ asset(images_directory ~ picture.path) }}" id="cropzone" />
+            </div>
+        </div>
+        <input type="hidden" value="{{ crop_config.aspect_ratio }}" id="cropper_ratio" />
+        {{ form_widget(form.crop_coordinations, {'attr': {'class': 'crop-coordinations'}}) }}
+    </div>
+
+    {{ form_widget(form.save) }}
+    
+    {{ form_end(form) }}
+{% endblock %}

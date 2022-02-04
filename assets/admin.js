@@ -18,6 +18,8 @@ global.$ = global.jQuery = $;
 require('jquery-confirm');
 require('cropperjs');
 require('jquery-cropper');
+require('jquery-ui');
+const { Sortable } = require('jquery-ui/ui/widgets/sortable');
 const { Dropzone } = require('dropzone');
 import './bootstrap-datepicker.js';
 import './bootstrap-datepicker.fr.min.js';
@@ -90,4 +92,69 @@ $(document).ready(function(){
             }
         }
     });
+    var $grid = $('#grid');
+    
+    if($grid.length){
+        $grid.sortable({
+            tolerance: "pointer",
+            cursor: "move",
+            handle: ".imgdrag", 
+            draggable: ".image-element",
+            update: function (evt){
+                var item = evt.item;
+                setImagesOrder();
+            }
+        });
+
+        var $collectionHolder = $('div.grid');
+        $collectionHolder.find('.image-element').each(function() {
+            addImageDeleteLink($(this));
+            addOpenFormLink($(this));
+            addCloseFormLink($(this).find('.alt-title'));
+        });
+    }
 });
+
+function setImagesOrder(){
+    var collection = $('div.grid');
+    collection.find('.image-element').each(function(index){
+        $(this).find('.weight').val(index + 1);
+    });
+}
+
+function addImageDeleteLink(imageElement){
+    var deleteLink = $('<a href="#" title="Supprimer l\'image" class="far fa-times-circle imgremove" aria-hidden="true"></a>');
+    imageElement.find('.thumbnail').before(deleteLink);
+    deleteLink.on('click', function(e) {
+        e.preventDefault();
+        $.confirm({
+            title: 'Supprimer l\'image',
+            content: 'Voulez-vous réellement supprimer cette image ?',
+            buttons: {
+                confirm: {
+                    text : 'Confirmer',
+                    action: function(){
+                        imageElement.remove();
+                    }
+                },
+                cancel: {
+                    text : 'Annuler'                         
+                }
+            }
+        });
+    });
+}
+
+function addCloseFormLink(formelement){
+    formelement.find('.closeform').on('click', function(e){
+        e.preventDefault();
+        formelement.css('visibility', 'hidden');
+    });
+}
+
+function addOpenFormLink(imageelement){
+    imageelement.find('.openform').on('click', function(e){
+        e.preventDefault();
+        imageelement.find('.alt-title').css('visibility', 'visible');
+    });
+}

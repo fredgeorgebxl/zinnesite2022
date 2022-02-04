@@ -11,3 +11,49 @@
         margin-bottom: 5px;
     }
 }
+#grid{
+    .image-element{
+        .inner-element{
+            position: relative;
+            text-align: center;
+            border: 1px solid $gray-300;
+            border-radius: 5px;
+            padding-bottom: 5px;
+            background-color: $white;
+        }
+        .thumbnail{
+            margin-top: 15px;
+        }
+        .imgdrag{
+            position: absolute;
+            left: 5px;
+        }
+        .imgremove{
+            position: absolute;
+            right: 5px;
+            color: $danger;
+            text-decoration: none;
+        }
+        .alt-title{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            visibility: hidden;
+            text-align: left;
+            background-color: rgba($light, 0.9);
+            border-radius: 5px;
+            padding: 3px;
+            .closeform{
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                color: $secondary;
+                text-decoration: none;
+            }
+        }
+        .btn{
+            width: 100%;
+            margin: 5px 0 0 0;
+        }
+    }
+}
