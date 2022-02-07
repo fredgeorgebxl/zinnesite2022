@@ -3,8 +3,8 @@
 {% import "admin/macros.html.twig" as macros %}
 {% block title %}{{ 'general.administration'|trans}} | {{ 'events.events'|trans}}{% endblock %}
 {% block body %}
-    <h1>{{ 'events.events'|trans}}</h1>
-    <div class="section">
+    <h1 class="mb-3">{{ 'events.events'|trans}}</h1>
+    <div class="section mb-3">
         <a  class="btn btn-primary" href="{{ path('event_new') }}">{{ 'events.create'|trans}} <span class="fa fa-plus-square" aria-hidden="true"></span></a>
     </div>
     <table class="table listtable">

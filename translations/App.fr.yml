@@ -37,6 +37,7 @@ general:
     edit-videos: 'Editer les vidéos'
     back: 'Retour'
     cache-management: 'Gestion du cache'
+    advanced-functions: 'Fonctionnalités avancées'
     clear-cache: 'Effacer le cache'
     enable: 'Activer'
     disable: 'Désactiver'

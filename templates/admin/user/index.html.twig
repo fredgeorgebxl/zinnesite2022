@@ -2,9 +2,9 @@
 {% extends "admin/base-admin.html.twig" %}
 {% block title %}{{ 'general.administration'|trans}} | {{ 'users.users'|trans}}{% endblock %}
 {% block body %}
-    <h1>{{ 'users.users'|trans}} {% if disabled %}{{ 'users.disabled'|trans }}{% endif %}</h1>
+    <h1 class="mb-3">{{ 'users.users'|trans}} {% if disabled %}{{ 'users.disabled'|trans }}{% endif %}</h1>
     {% if not disabled %}
-    <div class="section">
+    <div class="section mb-3">
         <a class="btn btn-primary" href="{{ path('user_new') }}">{{ 'users.create'|trans}} <span class="fa fa-plus-square" aria-hidden="true"></span></a>
         <br/><br/>
     </div>

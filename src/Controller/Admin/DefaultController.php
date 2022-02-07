@@ -46,6 +46,7 @@ class DefaultController extends AbstractController
         return $this->redirectToRoute('admin_home');
     }
     */
+    
     /**
      * @Route("/switchpublish/{entity}/{ent_id}", requirements={"ent_id" = "\d+"}, name="switchpublish")
      */

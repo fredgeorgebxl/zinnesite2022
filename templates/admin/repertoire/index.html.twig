@@ -3,8 +3,8 @@
 {% import "admin/macros.html.twig" as macros %}
 {% block title %}{{ 'general.administration'|trans}} | {{ 'repertoire.repertoire'|trans}}{% endblock %}
 {% block body %}
-    <h1>{{ 'repertoire.repertoire'|trans}}</h1>
-    <div class="section">
+    <h1 class="mb-3">{{ 'repertoire.repertoire'|trans}}</h1>
+    <div class="section mb-3">
         <a class="btn btn-primary" href="{{ path('repertoire_new') }}">{{ 'repertoire.create'|trans}} <span class="fa fa-plus-square" aria-hidden="true"></span></a>
     </div>
     <table class="table listtable">

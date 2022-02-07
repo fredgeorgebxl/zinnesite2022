@@ -2,7 +2,7 @@
 {% extends "admin/base-admin.html.twig" %}
 {% block title %}{{ 'general.administration'|trans}}{% endblock %}
 {% block body %}
-    <h1>{{ 'general.admin-welcome-message'|trans }}</h1>
+    <h1 class="mb-3">{{ 'general.admin-welcome-message'|trans }}</h1>
     {% for label, flashes in app.session.flashbag.all %}
         {% for flash in flashes %}
             <div class="alert alert-{{ label }}">
@@ -10,8 +10,8 @@
             </div>
         {% endfor %}
     {% endfor %}
-    <div class="section">
-        <h3>{{ 'general.homepage-slideshow'|trans }}</h3>
+    <div class="section mb-3">
+        <h3 class="mb-3">{{ 'general.homepage-slideshow'|trans }}</h3>
         {# if slideshow is defined and slideshow is not null %}
             <a  class="btn btn-default" href="{{ path('gallery_addimages', {'ent_id' : slideshow.id}) }}">{{ 'gallery.addimages'|trans}} <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
             {% if slideshow.pictures|length %}
@@ -19,39 +19,32 @@
             {% endif %}
         {% else %}
             <a  class="btn btn-primary" href="{{ path('gallery_new', {'param' : 'homeslide'}) }}">{{ 'general.create-slideshow'|trans}} <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-        {% endif %}
+        {% endif #}
     </div>
-    <div class="section">
-        <h3>{{ 'general.homepage-video'|trans }}</h3>
-        <a  class="btn btn-default" href="{{ path('video') }}">{{ 'general.edit-videos'|trans}} <span class="glyphicon glyphicon-film" aria-hidden="true"></span></a>
-    </div>
-    <div class="section">
-        <h3>{{ 'parameter.parameters'|trans }}</h3>
-        <a  class="btn btn-default" href="{{ path('parameter_list') }}">{{ 'general.edit-parameters'|trans}} <span class="glyphicon glyphicon-check" aria-hidden="true"></span></a>
-    </div>
+
     {% if is_granted('ROLE_SUPER_ADMIN') %}
-    <div class="section">
-        <h3>{{ 'general.cache-management'|trans }}</h3>
-        <a  class="btn btn-default" href="{{ path('clear_cache') }}">{{ 'general.clear-cache'|trans}} <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a>
+    <div class="section mb-3">
+        <h3 class="mb-3">{{ 'general.advanced-functions'|trans }}</h3>
+        <a  class="btn btn-light" href="{# path('clear_cache') #}">{{ 'general.clear-cache'|trans}} <span class="fas fa-redo-alt" aria-hidden="true"></span></a>
     </div>
     {% endif %}
     <div class="section">
-        <h3>{{ 'general.homepage-shortcuts'|trans }}</h3>
+        <h3 class="mb-3">{{ 'general.homepage-shortcuts'|trans }}</h3>
         <div class="row">
             <div class="col-md-3">
-            <a href="{{ path('event_new') }}" class="home-shortcut btn btn-default"><span class="glyphicon glyphicon-calendar"></span>{{ 'general.addevent'|trans }}</a>
+            <a href="{{ path('event_new') }}" class="home-shortcut btn btn-light"><span class="far fa-calendar-alt"></span>{{ 'general.addevent'|trans }}</a>
             </div>
             <div class="col-md-3">
-            <a href="{{ path('repertoire_new') }}" class="home-shortcut btn btn-default"><span class="glyphicon glyphicon-music"></span>{{ 'general.addrepertoire'|trans }}</a>
+            <a href="{{ path('repertoire_new') }}" class="home-shortcut btn btn-light"><span class="fas fa-music"></span>{{ 'general.addrepertoire'|trans }}</a>
             </div>
             {% if is_granted('ROLE_SUPER_ADMIN') %}
             <div class="col-md-3">
-            <a href="{{ path('user_new') }}" class="home-shortcut btn btn-default"><span class="glyphicon glyphicon-user"></span>{{ 'general.addmember'|trans }}</a>
+            <a href="{{ path('user_new') }}" class="home-shortcut btn btn-light"><span class="fas fa-user"></span>{{ 'general.addmember'|trans }}</a>
             </div>
             {% endif %}
             <div class="col-md-3">
-            <a href="{{ path('gallery_new') }}" class="home-shortcut btn btn-default"><span class="glyphicon glyphicon-picture"></span>{{ 'general.addgallery'|trans }}</a>
+            <a href="{{ path('gallery_new') }}" class="home-shortcut btn btn-light"><span class="far fa-images"></span>{{ 'general.addgallery'|trans }}</a>
             </div>
-        </div> #}
+        </div>
     </div>
 {% endblock %}
