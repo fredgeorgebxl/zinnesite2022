@@ -43,7 +43,7 @@ general:
     disable: 'Désactiver'
     published: 'Publ.'
     date: 'Date(s)'
-    edit-parameters: 'Modifier la configuration'
+    edit-parameters: 'Editer les paramètres'
 users:
     users: 'Membres'
     disabled: 'désactivés'

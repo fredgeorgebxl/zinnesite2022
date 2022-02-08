@@ -1,5 +1,6 @@
 {% trans_default_domain 'App' %}
 {% extends "admin/base-admin.html.twig" %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
 {% import "admin/macros.html.twig" as macros %}
 
 {% block title %}{{ 'general.administration'|trans}} | {{ 'parameter.parameters'|trans}}{% endblock %}
@@ -8,6 +9,8 @@
 <div class="section mb-3">
     <a class="btn btn-primary" href="{{ path('parameter_new') }}">{{ 'parameter.add'|trans}} <span class="fa fa-plus-square" aria-hidden="true"></span></a>
 </div>
+{{ form_start(form) }}
+{{ form_errors(form.parameters) }}
     <table class="table listtable">
         <tr>
             <th>{{ 'parameter.type'|trans}}</th>
@@ -15,13 +18,15 @@
             <th>{{ 'parameter.value'|trans}}</th>
             <th></th>
         </tr>
-    {% for param in parameters %}
+    {% for paramField in form.parameters %}
         <tr>
-            <td>{{ param.type }}</td>
-            <td>{{ param.name }}</td>
-            <td>{{ param.value }}</td>
-            <td>{{ macros.deleteButton('repertoire', rep.id) }}</td>
+            <td>{{ paramField.vars.data.type }}</td>
+            <td>{{ paramField.vars.data.name }}</td>
+            <td>{{ form_widget(paramField.value) }}</td>
+            <td>{{ macros.deleteButton('parameter', paramField.vars.data.id) }}</td>
         </tr>
     {% endfor %}
     </table>
+{{ form_widget(form.save) }}
+{{ form_end(form) }}
 {% endblock %}
