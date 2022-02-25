@@ -141,5 +141,17 @@ textblock:
     content: 'Contenu'
     picture: 'Image'
     save: 'Enregistrer'
+homeslide:
+    homeslides: 'Intro homepage'
+    homeslide: 'Intro homepage'
+    create: 'Créer'
+    text: 'Texte (court)'
+    link_name: 'Texte du bouton'
+    link_url: 'Lien du bouton'
+    title: 'Titre'
+    selected: 'Sélectionné'
+    video: 'Url de la vidéo (Youtube - La vidéo ne s''affiche que s''il n''y a pas d''image)'
+    save: 'Enregistrer'
+    select: 'Sélectionner'
 website:
     title: 'Zinnechœur - Chorale à Bruxelles'

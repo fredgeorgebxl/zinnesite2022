@@ -1,0 +1,32 @@
+{% trans_default_domain 'App' %}
+{% extends "admin/base-admin.html.twig" %}
+{% import "admin/macros.html.twig" as macros %}
+{% block title %}{{ 'general.administration'|trans}} | {{ 'homeslide.homeslides'|trans}}{% endblock %}
+{% block body %}
+    <h1 class="mb-3">{{ 'homeslide.homeslides'|trans}}</h1>
+    <div class="section mb-3">
+        <a  class="btn btn-primary" href="{{ path('homeslide_new') }}">{{ 'homeslide.create'|trans}} <span class="fa fa-plus-square" aria-hidden="true"></span></a>
+    </div>
+    <table class="table listtable">
+        <tr>
+            <th>{{ 'homeslide.title'|trans}}</th>
+            <th class="text-center">{{ 'homeslide.selected'|trans}}</th>
+            <th></th>
+            <th></th>
+        </tr>
+    {% for hs in homeslides %}
+        <tr>
+            <td>{{ hs.title }}</td>
+            <td class="text-center">
+            {% if hs.selected %}
+            <span class="fas fa-check-circle text-success"></span>
+            {% else %}
+            <a href="{{ path('homeslide_select', {'ent_id': hs.id }) }}">{{ 'homeslide.select'|trans}}</a>
+            {% endif %}
+            </td>
+            <td>{{ macros.editButton('homeslide', hs.id) }}</td>
+            <td>{{ macros.deleteButton('homeslide', hs.id) }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
