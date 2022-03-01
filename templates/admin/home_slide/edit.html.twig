@@ -1,25 +1,20 @@
 {% trans_default_domain 'App' %}
 {% extends "admin/base-admin.html.twig" %}
-{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% form_theme form with 'bootstrap_5_layout.html.twig' %}
+{% block title %}{{'general.administration'|trans}} | {{ 'general.edit'|trans }} '{{ form.title.vars.value }}'{% endblock %}
 {% block body %}
-    <h1> {{ 'general.edit'|trans }} '{{ form.name.vars.value }}'</h1>
+    <h1> {{ 'general.edit'|trans }} '{{ form.title.vars.value }}'</h1>
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
         {{ form_row(form._token) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.season) }}
-        {{ form_row(form.date) }}
-    <div class="form-group">
-        {{ form_label(form.description) }}
-        {{ form_errors(form.description) }}
-        {{ form_widget(form.description) }}
-    </div>
-        {{ form_row(form.location) }}
-        {{ form_row(form.gallery) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.text) }}
+        {{ form_row(form.link_name) }}
+        {{ form_row(form.link_url) }}
         {% if crop_config.crop_coordinations is defined and crop_config.crop_coordinations is not empty %}
         {% set runtimeConfig = {"crop": {"size": [crop_config.crop_coordinations.width, crop_config.crop_coordinations.height], "start": [crop_config.crop_coordinations.x, crop_config.crop_coordinations.y] }} %}
         {% endif %}
         <fieldset>
-            <legend>{{ form_label(form.picture) }}</legend>
+            <legend>{{ form_label(form.image) }}</legend>
             {% if picture %}
             <div class="row">
                 {% if picture.path is defined and picture.path is not empty %}
@@ -38,24 +33,25 @@
             {% else %}
             <input type="hidden" value="" id="cropper_ratio" />
             {% endif %}
-            {% if form.picture.crop_coordinations is defined %}
-            {{ form_widget(form.picture.crop_coordinations, {'attr': {'class': 'crop-coordinations'}}) }}
+            {% if form.image.crop_coordinations is defined %}
+            {{ form_widget(form.image.crop_coordinations, {'attr': {'class': 'crop-coordinations'}}) }}
             {% endif %}
             {% endif %}
-                    {{ form_label(form.picture.file) }}
-                    {{ form_errors(form.picture.file) }}
+                    {{ form_label(form.image.file) }}
+                    {{ form_errors(form.image.file) }}
                 <div class="input-group">
-                    {{ form_widget(form.picture.file) }}
-                {% if form.picture.add_image is defined %}
-                    {{ form_widget(form.picture.add_image, {'attr': {'class': 'btn btn-outline-secondary'}}) }}
+                    {{ form_widget(form.image.file) }}
+                {% if form.image.add_image is defined %}
+                    {{ form_widget(form.image.add_image, {'attr': {'class': 'btn btn-outline-secondary'}}) }}
                 {% endif %}
-                {% if form.picture.remove_image is defined %}
-                    {{ form_widget(form.picture.remove_image, {'attr': {'class': 'btn btn-outline-danger'}}) }}
+                {% if form.image.remove_image is defined %}
+                    {{ form_widget(form.image.remove_image, {'attr': {'class': 'btn btn-outline-danger'}}) }}
                 {% endif %}
                 </div>
-            {{ form_row(form.picture.title) }}
-            {{ form_row(form.picture.alt) }}
+            {{ form_row(form.image.title) }}
+            {{ form_row(form.image.alt) }}
         </fieldset>
+        {{ form_row(form.video) }}
         {{ form_row(form.save) }}
     {{ form_end(form, {'render_rest': false}) }}
 {% endblock %}

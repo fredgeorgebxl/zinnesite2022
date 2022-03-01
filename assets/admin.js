@@ -75,6 +75,7 @@ $(document).ready(function(){
         var coord_array = coord.split(',');
         var start_coord = {x: parseInt(coord_array[0]), y: parseInt(coord_array[1]), width: parseInt(coord_array[2]), height: parseInt(coord_array[3])};
     }
+
     $cropzone.cropper({
         viewMode: 1,
         aspectRatio: $ratio.val(),
@@ -84,7 +85,7 @@ $(document).ready(function(){
         zoomable: false,
         autoCropArea: 1,
         crop: function(event) {
-            $coordinations.val(Math.round(event.detail.x) + ',' + Math.round(event.detail.y) + ',' + Math.round(event.detail.width) + ',' + Math.round(event.detail.height));
+            $coordinations.val(Math.floor(event.detail.x) + ',' + Math.floor(event.detail.y) + ',' + Math.floor(event.detail.width) + ',' + Math.floor(event.detail.height));
         },
         ready() {
             if (start_coord){

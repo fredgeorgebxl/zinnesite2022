@@ -89,24 +89,32 @@ class EventController extends AbstractController
                 'No event found for id '.$ent_id
             );
         }
-        /*
-        $zinneparams = $this->getParameter('zinne');
-        */
+        
         $form = $this->createForm(EventType::class,$event, ['entity_manager' => $em]);
         $form->handleRequest($request);
         $picture = $event->getPicture();
+        $cropConfig = [];
+        
+        if ($picture && $picture->getHeight() > 0){
+            $cropConfig = $imageManager->getFilterCroppingInfos($picture, 'site_gallery_preview');
+        }
         
         if($form->isSubmitted() && $form->isValid()){
+            $crop_coordinations = false;
             // Get data from the 'file' field
             $file = $form->get('picture')->get('file')->getData();
             $alt = $form->get('picture')->get('alt')->getData();
             $title = $form->get('picture')->get('title')->getData();
+            if ($form->has('crop_coordinations')){
+                $crop_coordinations = $form->get('picture')->get('crop_coordinations')->getData();
+            }
         
             
             if($file){
                 // if there's no image, create a new one
                 if(is_null($picture)){
                     $picture = $imageManager->initPicture($file, $alt, $title);
+                    $cropConfig = $imageManager->getFilterCroppingInfos($picture, 'site_gallery_preview');
                 }
                 // If there's an image, delete the current file...
                 if(!empty($picture->getPath())){
@@ -120,6 +128,9 @@ class EventController extends AbstractController
                 // Update image associated fields
                 $picture->setAlt($alt);
                 $picture->setTitle($title);
+                if ($crop_coordinations){
+                    $picture->setCropCoordinations($crop_coordinations);
+                }
             }
             
             // Remove image if necessary
@@ -146,6 +157,7 @@ class EventController extends AbstractController
         return $this->render('admin/event/edit.html.twig', array(
             'form' => $form->createView(),
             'picture' => $picture,
+            'crop_config' => $cropConfig,
         ));
         
     }

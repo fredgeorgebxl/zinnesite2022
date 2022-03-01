@@ -78,9 +78,86 @@ class HomeSlideController extends AbstractController
      * @Route("/edit/{ent_id}", requirements={"ent_id" = "\d+"}, name="homeslide_edit")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function editAction(Request $request, ImageManager $imageManager): Response
+    public function editAction($ent_id, Request $request, ImageManager $imageManager): Response
     {
+        $em = $this->getDoctrine()->getManager();
+        $homeslide = $em->getRepository(HomeSlide::class)->find($ent_id);
+        
+        if (!$homeslide) {
+            throw $this->createNotFoundException(
+                'No homeslide found for id '.$ent_id
+            );
+        }
+        
+        $form = $this->createForm(HomeslideType::class,$homeslide);
+        $form->handleRequest($request);
+        $picture = $homeslide->getImage();
+        $cropConfig = [];
+        
+        if ($picture && $picture->getHeight() > 0){
+            $cropConfig = $imageManager->getFilterCroppingInfos($picture, 'site_gallery_preview');
+        }
 
+        if($form->isSubmitted() && $form->isValid()){
+            
+            $crop_coordinations = false;
+            // Get data from the 'file' field
+            $file = $form->get('image')->get('file')->getData();
+            $alt = $form->get('image')->get('alt')->getData();
+            $title = $form->get('image')->get('title')->getData();
+            if ($form->has('crop_coordinations')){
+                $crop_coordinations = $form->get('image')->get('crop_coordinations')->getData();
+            }
+            if($file){
+                // if there's no image, create a new one
+                if(is_null($picture)){
+                    $picture = $imageManager->initPicture($file, $alt, $title);
+                    $cropConfig = $imageManager->getFilterCroppingInfos($picture, 'site_gallery_preview');
+                }
+                // If there's an image, delete the current file...
+                
+                if(!empty($picture->getPath())){
+                    $directory = $this->getParameter('images_directory_rel');
+                    $imageManager->deletePictureFiles($directory, $picture);
+                }
+                // ...and upload the new file
+                $imageManager->setFileToPicture($file, $picture);
+            } else {
+                // Update image associated fields
+                $picture->setAlt($alt);
+                $picture->setTitle($title);
+                if ($crop_coordinations){
+                    $picture->setCropCoordinations($crop_coordinations);
+                }
+            }
+            
+            // Remove image if necessary
+            
+            if($form->get('image')->has('remove_image') && $form->get('image')->get('remove_image')->isClicked()){
+                $directory = $this->getParameter('images_directory_rel');
+                $imageManager->deletePictureFiles($directory, $picture);
+                $homeslide->setImage(NULL);
+            }
+
+            // Reset picture to NULL if the picture has no path to avoid an SQL error
+            if(!is_null($picture) && empty($picture->getPath())){
+                $homeslide->setPicture(NULL);
+            }
+
+            $em->flush();
+            
+            if(($form->get('image')->has('remove_image') && $form->get('image')->get('remove_image')->isClicked()) || ($form->get('image')->has('add_image') && $form->get('image')->get('add_image')->isClicked())){
+                return $this->redirectToRoute('homeslide_edit', ['ent_id' => $ent_id]);
+            } else {
+                return $this->redirectToRoute('homeslide_list');
+            }
+        }
+
+        return $this->render('admin/home_slide/edit.html.twig', array(
+            'form' => $form->createView(),
+            'picture' => $picture,
+            'crop_config' => $cropConfig,
+        ));
     }
 
      /**
