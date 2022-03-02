@@ -95,7 +95,7 @@ class HomeSlideController extends AbstractController
         $cropConfig = [];
         
         if ($picture && $picture->getHeight() > 0){
-            $cropConfig = $imageManager->getFilterCroppingInfos($picture, 'site_gallery_preview');
+            $cropConfig = $imageManager->getFilterCroppingInfos($picture, 'site_homepage_main');
         }
 
         if($form->isSubmitted() && $form->isValid()){
@@ -112,7 +112,7 @@ class HomeSlideController extends AbstractController
                 // if there's no image, create a new one
                 if(is_null($picture)){
                     $picture = $imageManager->initPicture($file, $alt, $title);
-                    $cropConfig = $imageManager->getFilterCroppingInfos($picture, 'site_gallery_preview');
+                    $cropConfig = $imageManager->getFilterCroppingInfos($picture, 'site_homepage_main');
                 }
                 // If there's an image, delete the current file...
                 
@@ -141,7 +141,7 @@ class HomeSlideController extends AbstractController
 
             // Reset picture to NULL if the picture has no path to avoid an SQL error
             if(!is_null($picture) && empty($picture->getPath())){
-                $homeslide->setPicture(NULL);
+                $homeslide->setImage(NULL);
             }
 
             $em->flush();

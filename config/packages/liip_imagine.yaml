@@ -34,6 +34,14 @@ liip_imagine:
                     start: [0, 0]
                 scale:
                     dim: [ 768, 432 ]
+        site_homepage_main :
+            quality : 85
+            filters :
+                crop :
+                    size: [ 1000, 563 ]
+                    start: [0, 0]
+                scale:
+                    dim: [ 1000, 563 ]
         site_user_square :
             quality : 85
             filters :

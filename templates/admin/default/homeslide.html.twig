@@ -1,0 +1,21 @@
+{% import "admin/macros.html.twig" as macros %}
+<div class="border container mb-3 p-3">
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <h1>{{ homeslide.title }}</h1>
+            <p>{{ homeslide.text }}</p>
+            {% if homeslide.linkname is not empty and homeslide.linkurl is not empty %}
+                <div class="p3">
+                    <a class="btn btn-primary disabled" role="button" aria-disabled="true">{{ homeslide.linkname }}</a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-9">
+            {% if homeslide.image is not null %}
+                {{ macros.croppedImage(homeslide.image, 'site_homepage_main') }}
+            {% elseif homeslide.video is not empty %}
+                {{ macros.video(homeslide.video) }}
+            {% endif %}
+        </div>
+    </div>
+</div>

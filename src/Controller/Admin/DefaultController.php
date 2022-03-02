@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\HomeSlide;
 
 /**
  * @Route("/admin")
@@ -18,10 +19,14 @@ class DefaultController extends AbstractController
      */
     public function indexAction()
     {
-        //$entityManager = $this->getDoctrine()->getManager();
-        //$homepage_slideshow = $entityManager->getRepository(\AppBundle\Entity\Gallery::class)->findOneBy(['homeslide' => 1]);
-        $homepage_slideshow = [];
-        return $this->render('admin/default/index.html.twig', ['slideshow' => $homepage_slideshow]);
+        $em = $this->getDoctrine()->getManager();
+        $homeslide = [];
+        $homeslide = $em->getRepository(HomeSlide::class)->findOneBy(['selected' => 1]);
+        if ($homeslide->getImage()){
+            $path = $homeslide->getImage()->getPath();
+        }
+        
+        return $this->render('admin/default/index.html.twig', ['homeslide' => $homeslide]);
     }
     
     /**

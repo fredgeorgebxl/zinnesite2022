@@ -23,3 +23,15 @@
         {{ date1|date('d/m/Y') }}
     {% endif %}
 {% endmacro %}
+{% macro croppedImage(picture, style) %}
+    {% if picture.cropcoordinations is defined and picture.cropcoordinations is not empty %}
+        {% set coordinations = picture.cropcoordinations|split(',') %}
+        {% set runtimeConfig = {"crop": {"size": [coordinations[2], coordinations[3]], "start": [coordinations[0], coordinations[1]] }} %}
+        <img src="{{ asset(images_directory ~ picture.path) | imagine_filter(style, runtimeConfig) }}" class="img-fluid"  />
+    {% endif %}
+{% endmacro %}
+{% macro video(url) %}
+    <div class="ratio ratio-16x9">
+        <iframe src="{{ url }}" title="YouTube video" allowfullscreen></iframe>
+    </div>
+{% endmacro %}

@@ -11,15 +11,13 @@
         {% endfor %}
     {% endfor %}
     <div class="section mb-3">
-        <h3 class="mb-3">{{ 'general.homepage-slideshow'|trans }}</h3>
-        {# if slideshow is defined and slideshow is not null %}
-            <a  class="btn btn-default" href="{{ path('gallery_addimages', {'ent_id' : slideshow.id}) }}">{{ 'gallery.addimages'|trans}} <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-            {% if slideshow.pictures|length %}
-                <a  class="btn btn-default" href="{{ path('gallery_editimages', {'ent_id' : slideshow.id}) }}">{{ 'gallery.editimages'|trans}} <span class="glyphicon glyphicon-th" aria-hidden="true"></span></a>
-            {% endif %}
+        <h3 class="mb-3">{{ 'general.homeslide'|trans }}</h3>
+        {% if homeslide is empty %}
+            <p>{{ 'general.no-homeslide'|trans }}</p>
         {% else %}
-            <a  class="btn btn-primary" href="{{ path('gallery_new', {'param' : 'homeslide'}) }}">{{ 'general.create-slideshow'|trans}} <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-        {% endif #}
+            {{ include('admin/default/homeslide.html.twig') }}
+        {% endif %}
+        <a  class="btn btn-light" href="{{ path('homeslide_list') }}">{{ 'general.homeslides'|trans }}</a>
     </div>
 
     {% if is_granted('ROLE_SUPER_ADMIN') %}

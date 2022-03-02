@@ -44,6 +44,9 @@ general:
     published: 'Publ.'
     date: 'Date(s)'
     edit-parameters: 'Editer les paramètres'
+    homeslide: 'Intro homepage'
+    homeslides: 'Editer intros homepage'
+    no-homeslide: 'Aucune intro de homepage sélectionnée'
 users:
     users: 'Membres'
     disabled: 'désactivés'

@@ -24,7 +24,7 @@
                 {% endif %}
                 {% if runtimeConfig is defined %}
                 <div class="col-md-3 px-4">
-                    <img src="{{ asset(images_directory ~ picture.path) | imagine_filter('site_gallery_preview', runtimeConfig) }}" class="img-fluid"  />
+                    <img src="{{ asset(images_directory ~ picture.path) | imagine_filter('site_homepage_main', runtimeConfig) }}" class="img-fluid"  />
                 </div>
                 {% endif %}
             </div>
