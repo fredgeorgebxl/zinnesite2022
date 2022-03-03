@@ -35,6 +35,7 @@ services:
         arguments: ["@knp_menu.factory"]
         tags:
             - { name: knp_menu.menu_builder, method: adminMenu, alias: admin }
+            - { name: knp_menu.menu_builder, method: mainMenu, alias: main }
 
     App\Service\ImageManager:
         arguments:

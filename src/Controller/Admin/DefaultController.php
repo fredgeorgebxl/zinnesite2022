@@ -8,6 +8,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\HomeSlide;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 /**
  * @Route("/admin")
@@ -32,15 +36,16 @@ class DefaultController extends AbstractController
     /**
      * @Route("/clearcache", name="clear_cache")
      */
-    /*
-    public function clearCache($env = 'prod', $debug = true)
+
+    public function clearCache(KernelInterface $kernel)
     {
-        $kernel = new \AppKernel($env, $debug);
         $application = new Application($kernel);
         $application->setAutoExit(false);
 
         $input = new ArrayInput([
-            'command' => 'cache:clear'
+            'command' => 'cache:clear',
+            '--env' => 'prod',
+            '--no-warmup' => '',
         ]);
 
         $output = new BufferedOutput();
@@ -50,7 +55,27 @@ class DefaultController extends AbstractController
         
         return $this->redirectToRoute('admin_home');
     }
-    */
+
+    /**
+     * @Route("/clearimagecache", name="clear_image_cache")
+     */
+
+    public function clearImageCache(KernelInterface $kernel)
+    {
+        $application = new Application($kernel);
+        $application->setAutoExit(false);
+
+        $input = new ArrayInput([
+            'command' => 'liip:imagine:cache:remove',
+        ]);
+
+        $output = new BufferedOutput();
+        $application->run($input, $output);
+        
+        $this->addFlash("success", $output->fetch());
+        
+        return $this->redirectToRoute('admin_home');
+    }
     
     /**
      * @Route("/switchpublish/{entity}/{ent_id}", requirements={"ent_id" = "\d+"}, name="switchpublish")

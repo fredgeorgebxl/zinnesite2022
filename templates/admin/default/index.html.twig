@@ -23,7 +23,8 @@
     {% if is_granted('ROLE_SUPER_ADMIN') %}
     <div class="section mb-3">
         <h3 class="mb-3">{{ 'general.advanced-functions'|trans }}</h3>
-        <a  class="btn btn-light" href="{# path('clear_cache') #}">{{ 'general.clear-cache'|trans}} <span class="fas fa-redo-alt" aria-hidden="true"></span></a>
+        <a  class="btn btn-light" href="{{ path('clear_cache') }}">{{ 'general.clear-cache'|trans}} <span class="fas fa-redo-alt" aria-hidden="true"></span></a>
+        <a  class="btn btn-light" href="{{ path('clear_image_cache') }}">{{ 'general.clear-image-cache'|trans}} <span class="fas fa-redo-alt" aria-hidden="true"></span></a>
         <a  class="btn btn-light" href="{{ path('parameter_list') }}">{{ 'general.edit-parameters'|trans}} <span class="fas fa-check-double" aria-hidden="true"></span></a>
     </div>
     

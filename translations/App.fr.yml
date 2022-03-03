@@ -39,6 +39,7 @@ general:
     cache-management: 'Gestion du cache'
     advanced-functions: 'Fonctionnalités avancées'
     clear-cache: 'Effacer le cache'
+    clear-image-cache: 'Effacer le cache images'
     enable: 'Activer'
     disable: 'Désactiver'
     published: 'Publ.'

@@ -1,0 +1,25 @@
+{% trans_default_domain 'Front' %}
+{% extends 'base.html.twig' %}
+{% block title %}{{ 'website.title'|trans }}{% endblock %}
+{% block opengraph %}
+    <meta property="og:title" content="{{ 'website.title'|trans }}" />
+    <meta name="og:description" content="{{ 'website.description'|trans }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ absolute_url(path('homepage')) }}" />
+{% endblock %}
+{% block body %}
+    <section class="main-hp">
+        {% if homeslide is not empty %}
+            {{ include('default/homeslide.html.twig') }}
+        {% endif %}
+        <div class="container">
+            <h2>{{ 'website.hp-presentation-title'|trans }}</h2>
+            
+            {{ text_block('homepage_presentation_text') }}
+            <p>
+                <a href="{# path('membres') #}" class="">{{ 'website.homebtn.choristes'|trans }}</a>
+            </p>
+        </div>
+    </section>
+    
+{% endblock %}

@@ -29,8 +29,8 @@ class Builder
                 $menu->addChild('repertoire.repertoire', array('route' => 'repertoire_list'))
                         ->setExtra('translation_domain', 'App');
 
-                $menu->addChild('videos.videos', array('route' => 'video_list'))
-                        ->setExtra('translation_domain', 'App');
+                // $menu->addChild('videos.videos', array('route' => 'video_list'))
+                //        ->setExtra('translation_domain', 'App');
 
                 $menu->addChild('gallery.galleries', array('route' => 'gallery_list'))
                         ->setExtra('translation_domain', 'App');
@@ -47,23 +47,23 @@ class Builder
 
         public function mainMenu(array $options): ItemInterface
         {
-                $menu = $this->factory->createItem('root', array('childrenAttributes' => array('class' => 'vertical large-horizontal menu')));
+                $menu = $this->factory->createItem('root', array('childrenAttributes' => array('class' => 'navbar-nav me-auto mb-2 mb-sm-0')));
                 
-                $menu->addChild('website.agenda', array('route' => 'agenda'))
-                        ->setExtra('translation_domain', 'Front');
-                $menu->addChild('website.repertoire', array('route' => 'repertoire'))
-                        ->setExtra('translation_domain', 'Front');
-                $menu->addChild('website.membres', array('route' => 'membres'))
-                        ->setExtra('translation_domain', 'Front');
-                $menu->addChild('website.photos', array('route' => 'photos'))
-                        ->setExtra('translation_domain', 'Front');
+                // $menu->addChild('website.agenda', array('route' => 'agenda'))
+                //         ->setExtra('translation_domain', 'Front');
+                // $menu->addChild('website.repertoire', array('route' => 'repertoire'))
+                //         ->setExtra('translation_domain', 'Front');
+                // $menu->addChild('website.membres', array('route' => 'membres'))
+                //         ->setExtra('translation_domain', 'Front');
+                // $menu->addChild('website.photos', array('route' => 'photos'))
+                //         ->setExtra('translation_domain', 'Front');
                 //$menu->addChild('website.videos', array('uri' => 'https://www.youtube.com/channel/UC_tp-m7g0eqs0IwxhA1k9mA'))
                 //        ->setLinkAttribute('target', '_blank')
                 //        ->setExtra('translation_domain', 'Front');
-                $menu->addChild('website.contact', array('route' => 'contact'))
-                        ->setExtra('translation_domain', 'Front');
-                $menu->addChild('website.joinus', array('route' => 'joinus'))
-                        ->setExtra('translation_domain', 'Front');
+                // $menu->addChild('website.contact', array('route' => 'contact'))
+                //         ->setExtra('translation_domain', 'Front');
+                // $menu->addChild('website.joinus', array('route' => 'joinus'))
+                //         ->setExtra('translation_domain', 'Front');
                 
                 return $menu;
         }

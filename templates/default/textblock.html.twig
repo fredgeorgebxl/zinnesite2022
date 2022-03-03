@@ -1,0 +1,11 @@
+{% trans_default_domain 'Front' %}
+{% set classes = 'textblock' %}
+{% if truncated is defined and truncated == false %}
+<div>
+    <div>
+        {{ textblock.content|raw }}
+    </div>
+</div>
+{% else %}
+    {{ textblock.content|raw|u.truncate(150, true) }}
+{% endif %}
