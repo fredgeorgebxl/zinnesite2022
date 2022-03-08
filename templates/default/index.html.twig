@@ -8,18 +8,55 @@
     <meta property="og:url" content="{{ absolute_url(path('homepage')) }}" />
 {% endblock %}
 {% block body %}
-    <section class="main-hp">
+    <section class="homeslide">
         {% if homeslide is not empty %}
             {{ include('default/homeslide.html.twig') }}
         {% endif %}
+    </section>
+    {% if nextconcerts is defined and nextconcerts|length %}
+    <section class="nextconcerts">
         <div class="container">
-            <h2>{{ 'website.hp-presentation-title'|trans }}</h2>
-            
-            {{ text_block('homepage_presentation_text') }}
-            <p>
-                <a href="{# path('membres') #}" class="">{{ 'website.homebtn.choristes'|trans }}</a>
-            </p>
+            <div class="row">
+                <div class="col-md-9"><h2>{{ 'website.nextevents'|trans }}</h2></div>
+                <div class="col-md-3"><a href="" class="btn btn btn-outline-secondary">{{ 'website.homebtn.events'|trans }}</a></div>
+            </div>
+            <div class="row">
+                {% for event in nextconcerts %}
+                {{ include('default/eventdetail.html.twig') }}
+                {% endfor %}
+            </div>
         </div>
     </section>
-    
+    {% endif %}
+    <section class="presentation">
+        <div class="container">          
+            {{ text_block('homepage_presentation_text') }}
+        </div>
+    </section>
+    <section class="images">
+        {% if pictures is defined and pictures|length %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9"><h2>{{ 'website.hp-images-title'|trans }}</h2></div>
+                <div class="col-md-3"><a href="" class="btn btn btn-outline-secondary">{{ 'website.viewmore'|trans }}</a></div>
+            </div>
+        </div>
+        <div class="hp-images">
+            {% for picture in pictures %}
+                {{ cropped_image(picture, 'site_image_preview') }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </section>
+    <section class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">{{ text_block('homepage_contact_text') }}</div>
+                <div class="col-md-3">
+                    <a href="" class="btn btn btn-outline-secondary">{{ 'website.homebtn.contact'|trans }}</a><br/>
+                    <a href="" class="btn btn btn-outline-secondary">{{ 'website.homebtn.joinus'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

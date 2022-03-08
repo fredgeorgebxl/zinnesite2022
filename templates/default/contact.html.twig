@@ -1,0 +1,27 @@
+{% trans_default_domain 'Front' %}
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block title %}{{ 'website.title'|trans }} | {{ 'website.contact'|trans }}{% endblock %}
+{% block description %}{{ text_block('contact_intro') }}{% endblock %}
+{% block opengraph %}
+<meta property="og:title" content="{{ 'website.contact'|trans }}" />
+<meta property="og:description" content="{{ 'website.contact-intro'|trans|striptags|u.truncate(150, true) }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ absolute_url(path('contact')) }}" />
+<meta property="og:image" content="{# absolute_url(asset('images/og-default.jpg')) #}" />
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1>{{ 'website.contact'|trans }}</h1>
+        {{ text_block('contact_intro') }}
+        {% if messagesent is defined and messagesent is not null %}
+            {% if messagesent == 1 %}
+                <div class="callout success large">{{ 'website.contactform.sendconfirm'|trans }}</div>
+            {% else %}
+                <div class="callout alert large">{{ 'website.contactform.senderror'|trans }}</div>
+            {% endif %}
+        {% else %}
+        {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {% endif %}
+    </div>    
+{% endblock %}

@@ -2,4 +2,6 @@
     {% set coordinations = picture.cropcoordinations|split(',') %}
     {% set runtimeConfig = {"crop": {"size": [coordinations[2], coordinations[3]], "start": [coordinations[0], coordinations[1]] }} %}
     <img src="{{ asset(images_directory ~ picture.path) | imagine_filter(style, runtimeConfig) }}" title="{{ picture.title }}" alt="{{ picture.alt }}" class="img-fluid" />
+{% else %}
+    <img src="{{ asset(images_directory ~ picture.path) | imagine_filter(style) }}" title="{{ picture.title }}" alt="{{ picture.alt }}" class="img-fluid" />
 {% endif %}

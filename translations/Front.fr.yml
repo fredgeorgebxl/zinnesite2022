@@ -4,6 +4,7 @@ website:
     slogan: 'Zinnechœur, la chorale bruxelloise qui a du chien !'
     discoverthechoir: 'Découvrez la chorale'
     homebtn:
+        events: 'Voir l''agenda'
         choristes: 'Découvrez les choristes'
         repertoire: 'Découvrez notre répertoire'
         contact: 'Contactez-nous !'

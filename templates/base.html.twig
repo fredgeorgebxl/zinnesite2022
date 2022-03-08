@@ -1,3 +1,4 @@
+{% trans_default_domain 'Front' %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,16 +16,17 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-sm navbar-light" aria-label="Main menu">
-            <div class="container">
-                <a class="navbar-brand" href="{{ path('homepage') }}">{{ 'website.title'|trans}}</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="mainMenu">
-                    {{ knp_menu_render('main',{'currentClass' : 'active'}) }}
-                </div>
+            <a class="navbar-brand" href="{{ path('homepage') }}">{{ 'website.title'|trans }}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainMenu">
+                {{ knp_menu_render('main',{'currentClass' : 'active'}) }}
             </div>
         </nav>
         {% block body %}{% endblock %}
+        <footer>
+            © Zinnechœur {{ 'now' | date('Y') }}
+        </footer>
     </body>
 </html>

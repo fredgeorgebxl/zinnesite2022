@@ -22,12 +22,17 @@ liip_imagine:
                     mode:          outbound
                     allow_upscale: true
         site_image_medium :
-            quality : 85
+            quality : 95
             filters :
                 scale : 
                     dim: [ 800, 800 ]
+        site_image_preview :
+            quality : 95
+            filters :
+                scale :
+                    dim : [ 900, 300]
         site_gallery_preview :
-            quality : 85
+            quality : 95
             filters :
                 crop :
                     size: [ 768, 432 ]
@@ -35,7 +40,7 @@ liip_imagine:
                 scale:
                     dim: [ 768, 432 ]
         site_homepage_main :
-            quality : 85
+            quality : 100
             filters :
                 crop :
                     size: [ 1000, 563 ]
@@ -43,7 +48,7 @@ liip_imagine:
                 scale:
                     dim: [ 1000, 563 ]
         site_user_square :
-            quality : 85
+            quality : 95
             filters :
                 crop:
                     size: [ 500, 500 ]

@@ -1,12 +1,12 @@
 {% import "macros.html.twig" as macros %}
-<div class="border container mb-3 p-3">
+<div class="container mb-3 p-3">
     <div class="row">
         <div class="col-md-3 text-center">
             <h1>{{ homeslide.title }}</h1>
             <p>{{ homeslide.text }}</p>
             {% if homeslide.linkname is not empty and homeslide.linkurl is not empty %}
                 <div class="p3">
-                    <a class="btn btn-primary disabled" role="button" aria-disabled="true">{{ homeslide.linkname }}</a>
+                    <a class="btn btn-primary" role="button" href="{{ homeslide.linkurl }}" aria-disabled="true">{{ homeslide.linkname }}</a>
                 </div>
             {% endif %}
         </div>
