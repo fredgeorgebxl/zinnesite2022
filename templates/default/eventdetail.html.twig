@@ -5,14 +5,18 @@
 {% endif %}
     <div class="row">
         <div class="col-md-4 eventimage">
-            {% if event.picture != null %}
-            {{ cropped_image(event.picture, 'site_gallery_preview') }}
-            {% endif %}
+            <a href="{{ path('event', {'slug' : event.slug}) }}">
+                {% if event.picture != null %}
+                {{ cropped_image(event.picture, 'site_gallery_preview') }}
+                {% endif %}
+            </a>
         </div>
         <div class="col-md-8">
-            <p class="date">{{ event.date|format_datetime(pattern="dd/MM/yyyy") }}</p>
-            <p class="name">{{ event.name }}</p>
-            <p class="place">{{ event.location }}</p>
+            <a href="{{ path('event', {'slug' : event.slug}) }}">
+                <p class="date">{{ event.date|format_datetime(pattern="dd/MM/yyyy") }}</p>
+                <p class="name">{{ event.name }}</p>
+                <p class="place">{{ event.location }}</p>
+            </a>
         </div>
     </div>
 </div>

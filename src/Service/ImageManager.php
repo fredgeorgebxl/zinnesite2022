@@ -105,6 +105,15 @@ class ImageManager
         return $cropConfig;
     }
 
+    public function filterIsCropped(String $filter){
+        $filterConfiguration = $this->params->get('liip_imagine.filter_sets');
+        if (isset($filterConfiguration[$filter]['filters']['crop'])){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function calculateDefaultCropCoordinations($picture, $ratio){
         $coordinations = [];
         $original_width = $picture->getWidth();

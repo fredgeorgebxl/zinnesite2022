@@ -98,6 +98,28 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/agenda/{slug}", name="event")
+     */
+    public function eventAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $event = $em->getRepository(\App\Entity\Event::class)->findOneBy([ 'slug' => $slug, 'published' => 1]);
+        
+        if (!$event) {
+            throw $this->createNotFoundException(
+                'No event found for slug '.$slug
+            );
+        }
+        $gal_id = $event->getGallery();
+        if ($gal_id != 0){
+            $gallery = $em->getRepository(\App\Entity\Gallery::class)->findOneBy(['id' => $gal_id]);
+        } else {
+            $gallery = NULL;
+        }
+        return $this->render('default/event.html.twig', ['event' => $event, 'gallery' => $gallery]);
+    }
+
+    /**
      * @Route("/repertoire", name="repertoire")
      */
     public function repertoireAction()

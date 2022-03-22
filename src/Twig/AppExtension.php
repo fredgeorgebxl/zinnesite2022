@@ -6,15 +6,17 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Twig\Environment;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\ImageManager;
 
 
 class AppExtension extends AbstractExtension
 {
     private $em;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em,  ImageManager $imageManager)
     {
         $this->em = $em;
+        $this->imageManager = $imageManager;
     }
 
     /**
@@ -38,6 +40,11 @@ class AppExtension extends AbstractExtension
                     'needs_environment' => true,
                 ]
             ),
+            new TwigFunction('style_is_cropped', [$this, 'styleIsCropped'], [
+                'is_safe' => ['html'],
+                'needs_environment' => false,
+            ]
+        ),
         ];
     }
 
@@ -63,6 +70,10 @@ class AppExtension extends AbstractExtension
             'textblock' => $textBlock,
             'truncated' => $truncated,
         ]);
+    }
+
+    public function styleIsCropped($style){
+        return $this->imageManager->filterIsCropped($style);
     }
 
     /**

@@ -25,12 +25,14 @@ liip_imagine:
             quality : 95
             filters :
                 scale : 
-                    dim: [ 800, 800 ]
+                    dim: [ 900, 900 ]
+                    allow_upscale: true
         site_image_preview :
             quality : 95
             filters :
                 scale :
                     dim : [ 900, 250]
+                    allow_upscale: true
         site_gallery_preview :
             quality : 95
             filters :

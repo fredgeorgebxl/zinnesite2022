@@ -1,4 +1,5 @@
-{% if picture.cropcoordinations is defined and picture.cropcoordinations is not empty %}
+{% set is_cropped = style_is_cropped(style) %}
+{% if picture.cropcoordinations is defined and picture.cropcoordinations is not empty and is_cropped == true %}
     {% set coordinations = picture.cropcoordinations|split(',') %}
     {% set runtimeConfig = {"crop": {"size": [coordinations[2], coordinations[3]], "start": [coordinations[0], coordinations[1]] }} %}
     <img src="{{ asset(images_directory ~ picture.path) | imagine_filter(style, runtimeConfig) }}" title="{{ picture.title }}" alt="{{ picture.alt }}" class="img-fluid" />
