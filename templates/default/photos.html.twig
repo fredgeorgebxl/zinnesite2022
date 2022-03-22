@@ -18,7 +18,7 @@
         {% for gallery in galleries %}
             {% if gallery.pictures|length %}
             <div class="col-md-6">
-                <a href="{# path('gallery', {'slug': gallery.slug}) #}">
+                <a href="{{ path('gallery', {'slug': gallery.slug}) }}">
                     <div class="gallery-intro row">
                         <div class="col-md-4 galleryfront">
                             {% if gallery.pictures[0] is defined %}

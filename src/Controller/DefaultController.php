@@ -167,6 +167,25 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/photos/{slug}", name="gallery")
+     */
+    public function galleryAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $gallery_rep = $em->getRepository(\App\Entity\Gallery::class);
+        $gallery = $gallery_rep->createQueryBuilder('g')
+                ->leftJoin('g.pictures', 'pic')
+                ->where('g.slug = :slug')
+                ->andWhere('g.published = 1')
+                ->setParameter('slug', $slug)
+                ->addSelect('pic')
+                ->getQuery()
+                ->getSingleResult();
+        
+        return $this->render('default/gallery.html.twig', ['gallery' => $gallery]);
+    }
+
+    /**
      * @Route("/contact", name="contact")
      */
     public function contactAction(Request $request, MailerInterface $mailer)
