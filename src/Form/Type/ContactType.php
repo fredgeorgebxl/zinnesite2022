@@ -22,7 +22,7 @@ class ContactType extends AbstractType{
                 'constraints' => array(
                     new NotBlank(array("message" => "website.contactform.nameerror")),
                 )))
-            ->add('email', EmailType::class, array('label' => 'website.contactform.email', 'translation_domain' => 'Front',
+            ->add('information', EmailType::class, array('label' => 'website.contactform.email', 'translation_domain' => 'Front',
                 'constraints' => array(
                     new NotBlank(array("message" => "website.contactform.emailblankerror")),
                     new Email(array("message" => "website.contactform.emailvaliderror")),
@@ -35,6 +35,7 @@ class ContactType extends AbstractType{
                 'constraints' => array(
                     new NotBlank(array("message" => "website.contactform.messageerror")),
                 )))
+            ->add('email', TextType::class, ['required' => false])
             ->add('save', SubmitType::class, array('label' => 'website.contactform.send', 'translation_domain' => 'Front'));
     }
     

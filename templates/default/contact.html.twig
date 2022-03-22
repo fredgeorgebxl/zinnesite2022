@@ -21,7 +21,13 @@
                 <div class="callout alert large">{{ 'website.contactform.senderror'|trans }}</div>
             {% endif %}
         {% else %}
-        {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.information) }}
+        {{ form_row(form.subject) }}
+        {{ form_row(form.message) }}
+        {{ form_widget(form.email, {attr: {style: 'display:none !important', tabindex: '-1', autocomplete: 'off', ref: 'initHoneyPot'}}) }}
+        {{ form_end(form) }}
         {% endif %}
     </div>    
 {% endblock %}

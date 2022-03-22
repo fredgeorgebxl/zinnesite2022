@@ -1,5 +1,9 @@
-@import "custom";
+$primary: #03c997;
+$danger: #f8554d;
+
 @import "~bootstrap/scss/bootstrap";
+
+@import "custom";
 
 $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';

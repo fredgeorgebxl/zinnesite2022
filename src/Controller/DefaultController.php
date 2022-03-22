@@ -58,12 +58,17 @@ class DefaultController extends AbstractController
                 ->getQuery()
                 ->getResult();
 
-        return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
-            'homeslide' => $homeslide,
-            'nextconcerts' => $nextconcerts,
-            'pictures' => $pictures,
-        ]);
+        $response = new Response(
+            $this->render('default/index.html.twig', [
+                'controller_name' => 'DefaultController',
+                'homeslide' => $homeslide,
+                'nextconcerts' => $nextconcerts,
+                'pictures' => $pictures,
+            ])
+        );
+        $response->setSharedMaxAge(3600);
+
+        return $response;
     }
 
     /**
@@ -150,20 +155,23 @@ class DefaultController extends AbstractController
         
         if($form->isSubmitted() &&  $form->isValid()){
             $name = $form['name']->getData();
-            $email = $form['email']->getData();
+            $email = $form['information']->getData();
             $subject = $form['subject']->getData();
             $message = $form['message']->getData();
+            $honeypot = $form['email']->getData();
             
-            $email = (new Email())
+            if ($honeypot->trim()->isEmpty()){
+                $email = (new Email())
                ->from($email)
                ->subject($subject)
                ->html($this->renderView('mails/contactmail.html.twig',array('name' => $name, 'email' => $email, 'message' => $message)),'text/html');
             
-            $messagesent = TRUE;
-            try {
-                $mailer->send($email);
-            }  catch (TransportExceptionInterface $e) {
-                $messagesent = FALSE;
+                $messagesent = TRUE;
+                try {
+                    $mailer->send($email);
+                }  catch (TransportExceptionInterface $e) {
+                    $messagesent = FALSE;
+                }
             }
         }
         

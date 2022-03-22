@@ -30,7 +30,7 @@ liip_imagine:
             quality : 95
             filters :
                 scale :
-                    dim : [ 900, 300]
+                    dim : [ 900, 250]
         site_gallery_preview :
             quality : 95
             filters :
