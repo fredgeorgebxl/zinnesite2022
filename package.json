@@ -20,6 +20,7 @@
     "jquery-ui": "^1.13.1",
     "jquery-ui-bundle": "^1.12.1-migrate",
     "postcss-loader": "^6.1.1",
+    "simplelightbox": "^2.10.3",
     "yarn": "^1.22.11"
   },
   "devDependencies": {

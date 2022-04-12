@@ -23,9 +23,9 @@
             <p>{{ gallery.description }}</p>
             {% endif %}
         </div>
-        <div class="pictures">
+        <div class="pictures gallery">
         {% for image in gallery.pictures %}
-                {{ cropped_image(image, 'site_image_preview') }}
+                <a href="{{ asset(images_directory ~ image.path) }}">{{ cropped_image(image, 'site_image_preview') }}</a>
         {% endfor %}
         </div>
     </div>

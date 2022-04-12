@@ -201,11 +201,12 @@ class DefaultController extends AbstractController
             $message = $form['message']->getData();
             $honeypot = $form['email']->getData();
             
-            if ($honeypot->trim()->isEmpty()){
+            if ($honeypot === NULL || $honeypot->trim()->isEmpty()){
                 $email = (new Email())
-               ->from($email)
-               ->subject($subject)
-               ->html($this->renderView('mails/contactmail.html.twig',array('name' => $name, 'email' => $email, 'message' => $message)),'text/html');
+                ->to()
+                ->subject($subject)
+                ->replyTo($email)
+                ->html($this->renderView('mails/contactmail.html.twig',array('name' => $name, 'email' => $email, 'message' => $message)),'text/html');
             
                 $messagesent = TRUE;
                 try {
