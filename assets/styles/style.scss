@@ -1,5 +1,32 @@
+@font-face {
+    font-family: 'arimoregular';
+    src: url('../fonts/Arimo-Regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'arimobold';
+    src: url('../fonts/Arimo-Bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 $primary: #03c997;
 $danger: #f8554d;
+$color1: #4CD8B6;
+$color2: #FF5BAA;
+$color3: #4C97DC;
+$color4: #FA6F44;
+$color5: #33D043;
+$color6: #F14156;
+$color7: #26D1DC;
+$color8: #FDCA17;
+$color9: #A670DC;
+
+$font-family-sans-serif: arimoregular, sans-serif;
+$headings-font-family: arimobold, sans-serif;
 
 @import "~bootstrap/scss/bootstrap";
 

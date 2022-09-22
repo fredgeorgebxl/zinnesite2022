@@ -7,16 +7,18 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ absolute_url(path('homepage')) }}" />
 {% endblock %}
+{% block bodytag %}<body class="homepage">{% endblock %}
 {% block body %}
+    <div class="diagbg-reverse">
     <section class="homeslide">
         {% if homeslide is not empty %}
             {{ include('default/homeslide.html.twig') }}
         {% endif %}
     </section>
     {% if nextconcerts is defined and nextconcerts|length %}
-    <section class="nextconcerts">
+    <section class="nextconcerts py-5">
         <div class="container">
-            <div class="row">
+            <div class="row mb-4">
                 <div class="col-md-9"><h2>{{ 'website.nextevents'|trans }}</h2></div>
                 <div class="col-md-3"><a href="" class="btn btn btn-outline-secondary">{{ 'website.homebtn.events'|trans }}</a></div>
             </div>
@@ -27,28 +29,27 @@
             </div>
         </div>
     </section>
+    </div>
     {% endif %}
-    <section class="presentation">
+    <section class="presentation bgcolor">
         <div class="container">          
             {{ text_block('homepage_presentation_text') }}
         </div>
     </section>
-    <section class="images">
+    <section class="images py-5 diagbg">
         {% if pictures is defined and pictures|length %}
         <div class="container">
-            <div class="row">
+            <div class="row mb-4">
                 <div class="col-md-9"><h2>{{ 'website.hp-images-title'|trans }}</h2></div>
                 <div class="col-md-3"><a href="" class="btn btn btn-outline-secondary">{{ 'website.viewmore'|trans }}</a></div>
             </div>
         </div>
         <div class="hp-images gallery">
-            {% for picture in pictures %}
-                <a href="{{ asset(images_directory ~ picture.path) }}">{{ cropped_image(picture, 'site_image_preview') }}</a>
-            {% endfor %}
+            {% for picture in pictures %}<a href="{{ asset(images_directory ~ picture.path) }}">{{ cropped_image(picture, 'site_image_preview') }}</a>{% endfor %}
         </div>
         {% endif %}
     </section>
-    <section class="contact">
+    <section class="contact bgcolor">
         <div class="container">
             <div class="row">
                 <div class="col-md-9">{{ text_block('homepage_contact_text') }}</div>

@@ -11,9 +11,14 @@
     {{ encore_entry_link_tags('app') }}
     <link rel="profile" href="http://microformats.org/profile/hcalendar"/>
 {% endblock %}
+{% block bodytag %}<body class="agenda">{% endblock %}
 {% block body %}
+    <div class="bgcolor">
+        <div class="container">
+            <h1>{{ 'website.agenda'|trans }}</h1>
+        </div>
+    </div>
     <div class="container agenda">
-        <h1>{{ 'website.agenda'|trans }}</h1>
         {% if events is defined and events|length %}
         <h2>{{ 'website.nextevents'|trans }}</h2>
         {% endif %}

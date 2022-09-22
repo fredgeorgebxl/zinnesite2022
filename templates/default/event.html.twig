@@ -17,6 +17,7 @@
     {{ encore_entry_link_tags('app') }}
     <link rel="profile" href="http://microformats.org/profile/hcalendar"/>
 {% endblock %}
+{% block bodytag %}<body class="event">{% endblock %}
 {% block body %}
 <div class="event container">
     {{ include('default/eventcontent.html.twig') }}

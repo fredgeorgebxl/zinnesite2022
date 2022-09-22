@@ -14,8 +14,8 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
-        <nav class="navbar navbar-expand-sm navbar-light" aria-label="Main menu">
+    {% block bodytag %}<body>{% endblock %}
+        <nav class="navbar navbar-expand-sm navbar-light bgcolor" aria-label="Main menu">
             <a class="navbar-brand" href="{{ path('homepage') }}">{{ 'website.title'|trans }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -23,10 +23,20 @@
             <div class="collapse navbar-collapse" id="mainMenu">
                 {{ knp_menu_render('main',{'currentClass' : 'active'}) }}
             </div>
+            <span class="navbar-text">
+                <a href="https://www.facebook.com/Zinnechoeur"><i class="fab fa-facebook"></i></a> 
+                <a href="https://www.instagram.com/zinne.choeur"><i class="fab fa-instagram"></i></a> 
+                <a href="https://www.youtube.com/channel/UC_tp-m7g0eqs0IwxhA1k9mA"><i class="fab fa-youtube"></i></a>
+            </span>
         </nav>
         {% block body %}{% endblock %}
-        <footer>
-            © Zinnechœur {{ 'now' | date('Y') }}
+        <footer class="position-relative bgcolor py-5 px-4">
+            <span>© Zinnechœur {{ 'now' | date('Y') }}</span>
+            <span class="navbar-text position-absolute end-0 px-4 py-0">
+                <a href="https://www.facebook.com/Zinnechoeur"><i class="fab fa-facebook"></i></a> 
+                <a href="https://www.instagram.com/zinne.choeur"><i class="fab fa-instagram"></i></a> 
+                <a href="https://www.youtube.com/channel/UC_tp-m7g0eqs0IwxhA1k9mA"><i class="fab fa-youtube"></i></a>
+            </span>
         </footer>
     </body>
 </html>

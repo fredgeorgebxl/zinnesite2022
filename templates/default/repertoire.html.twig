@@ -8,10 +8,13 @@
 <meta property="og:url" content="{{ absolute_url(path('repertoire')) }}" />
 <meta property="og:image" content="{# absolute_url(asset('images/og-default.jpg')) #}" />
 {% endblock %}
+{% block bodytag %}<body class="repertoire">{% endblock %}
 {% block body %}
     <div class="container">
-        <h1>{{ 'website.repertoire'|trans }}</h1>
-        <div>{{ text_block('repertoire_intro') }}</div>
+        <div class="bgcolor">
+            <h1>{{ 'website.repertoire'|trans }}</h1>
+            <div>{{ text_block('repertoire_intro') }}</div>
+        </div>
         <div class="row">
     {% for song in repertoire %}
         <div class="rep col-md-4 col-lg-3">
@@ -22,8 +25,10 @@
         </div>
     </div>
     <div class="container">
-        <h2>{{ 'website.oldrepertoire'|trans }}</h2>
-        <div>{{ text_block('repertoire_old_intro') }}</div>
+        <div class="bgcolor">
+            <h2>{{ 'website.oldrepertoire'|trans }}</h2>
+            <div>{{ text_block('repertoire_old_intro') }}</div>
+        </div>
         <div class="row">
     {% for oldsong in oldrepertoire %}
         <div class="oldrep col-sm-6 col-md-3 col-lg-2">
