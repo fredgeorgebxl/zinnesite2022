@@ -1,17 +1,28 @@
 {% trans_default_domain 'Front' %}
-<div class="concert-detail vevent">
-    <h1 class="summary">{{ event.name }}</h1>
-    <p class="date h4">{{ event.date|date('d/m/Y') }}</p>
-    <span class="dtstart visually-hidden">{{ event.date|date('Y-m-d') }}</span>
-    {% if event.location is not empty %}
-    <p class="location">{{ event.location }}</p>
-    {% endif %}
-    <div class="row">
-        {% if event.picture is defined and event.picture is not null %}
-        <div class="col-md-4">
-            {{ cropped_image(event.picture, 'site_image_medium') }}
+<div class="pageintro bgcolor">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 pt-5">
+                <h1 class="summary">{{ event.name }}</h1>
+            </div>
+            <div class="col-md-8 py-5">
+                <p class="date h4 mb-1">{{ event.date|date('d/m/Y') }}</p>
+                <span class="dtstart visually-hidden">{{ event.date|date('Y-m-d') }}</span>
+                {% if event.location is not empty %}
+                    <p class="location">{{ event.location }}</p>
+                {% endif %}
+            </div>
         </div>
-        {% endif %}
-        <div class="event-content col-md-8">{{ event.description|raw }}</div>
     </div>
 </div>
+<section class="diagbg">
+    <div class=" container concert-detail vevent py-4">
+        <div class="row">
+            {% if event.picture is defined and event.picture is not null %}
+            <div class="col-md-4">
+                {{ cropped_image(event.picture, 'site_image_medium') }}
+            </div>
+            {% endif %}
+            <div class="event-content col-md-8">{{ event.description|raw }}</div>
+        </div>
+    </div>

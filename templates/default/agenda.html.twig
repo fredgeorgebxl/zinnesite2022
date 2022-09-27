@@ -13,33 +13,42 @@
 {% endblock %}
 {% block bodytag %}<body class="agenda">{% endblock %}
 {% block body %}
-    <div class="bgcolor">
+    <div class="pageintro bgcolor">
         <div class="container">
-            <h1>{{ 'website.agenda'|trans }}</h1>
-        </div>
-    </div>
-    <div class="container agenda">
-        {% if events is defined and events|length %}
-        <h2>{{ 'website.nextevents'|trans }}</h2>
-        {% endif %}
-        <div class="row">
-        {% for event in events %}
-            {{ include('default/eventdetail.html.twig', {large: true}) }}
-        {% endfor %}
-        </div>
-        <h2>{{ 'website.pastevents'|trans }}</h2>
-        {% set curseason = null %}
-        {% for event in pastevents %}
-            {% if curseason != event.season %}
-            {% if not loop.first %}
-            </div>
-            {% endif %}
-            <h3>{{ 'website.season'|trans }} {{ event.season }}</h3>
             <div class="row">
-            {% endif %}
-                {{ include('default/eventdetail.html.twig') }}
-            {% set curseason = event.season %}
-        {% endfor %}
+                <div class="col-md-4 pt-5">
+                    <h1>{{ 'website.agenda'|trans }}</h1>
+                </div>
+                <div class="col-md-8 py-5">
+                    {{ text_block('agenda_intro') }}
+                </div>
+            </div>
         </div>
     </div>
+    <section class="diagbg mb-5">
+        <div class="container agenda">
+            {% if events is defined and events|length %}
+            <h2 class="mb-4">{{ 'website.nextevents'|trans }}</h2>
+            {% endif %}
+            <div class="row">
+            {% for event in events %}
+                {{ include('default/eventdetail.html.twig', {large: true}) }}
+            {% endfor %}
+            </div>
+            <h2 class="mb-4">{{ 'website.pastevents'|trans }}</h2>
+            {% set curseason = null %}
+            {% for event in pastevents %}
+                {% if curseason != event.season %}
+                {% if not loop.first %}
+                </div>
+                {% endif %}
+                <h3 class="season mt-4">{{ 'website.season'|trans }} {{ event.season }}</h3>
+                <div class="row">
+                {% endif %}
+                    {{ include('default/eventdetail.html.twig') }}
+                {% set curseason = event.season %}
+            {% endfor %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

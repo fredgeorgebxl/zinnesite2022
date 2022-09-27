@@ -19,7 +19,7 @@
 {% endblock %}
 {% block bodytag %}<body class="event">{% endblock %}
 {% block body %}
-<div class="event container">
+<div class="event">
     {{ include('default/eventcontent.html.twig') }}
     {% if gallery is defined and gallery is not null %}
     <div>
@@ -35,11 +35,12 @@
         {% endfor %}
         {% if gallery.pictures[5] is defined %}
             <div class="event-images col-sm-4 col-md-2">
-                <a href="{# path('gallery', {'slug': gallery.slug}) #}"><span class="caption">{{ 'website.viewmore'|trans }}</span></a>
+                <a href="{{ path('gallery', {'slug': gallery.slug}) }}"><span class="caption">{{ 'website.viewmore'|trans }}</span></a>
             </div>
         {% endif %}
         </div>
     </div>
     {% endif %}
+    </section>
 </div>
 {% endblock %}

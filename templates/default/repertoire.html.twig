@@ -10,32 +10,53 @@
 {% endblock %}
 {% block bodytag %}<body class="repertoire">{% endblock %}
 {% block body %}
-    <div class="container">
-        <div class="bgcolor">
-            <h1>{{ 'website.repertoire'|trans }}</h1>
-            <div>{{ text_block('repertoire_intro') }}</div>
-        </div>
+    
+    <div class="pageintro bgcolor">
+        <div class="container">
         <div class="row">
-    {% for song in repertoire %}
-        <div class="rep col-md-4 col-lg-3">
-            <h3 class="text-center">{{ song.title }}</h3>
-            <p class="text-center">{{ song.description }}</p>
+            <div class="col-md-4 pt-5">
+                <h1>{{ 'website.repertoire'|trans }}</h1>
+            </div>
+            <div class="col-md-8 py-5">
+                {{ text_block('repertoire_intro') }}
+            </div>
         </div>
-    {% endfor %}
         </div>
     </div>
-    <div class="container">
-        <div class="bgcolor">
-            <h2>{{ 'website.oldrepertoire'|trans }}</h2>
-            <div>{{ text_block('repertoire_old_intro') }}</div>
+    <section class="diagbg">
+        <div class="container py-4">
+            <div class="row">
+            {% for song in repertoire %}
+                <div class="rep col-md-4 col-lg-3 mb-3">
+                    <h3 class="text-center">{{ song.title }}</h3>
+                    <p class="text-center">{{ song.description }}</p>
+                </div>
+            {% endfor %}
+            </div>
         </div>
+    </section>
+    <div class="pageintro bgcolor">
+        <div class="container">
         <div class="row">
-    {% for oldsong in oldrepertoire %}
-        <div class="oldrep col-sm-6 col-md-3 col-lg-2">
-            <h4 class="text-center">{{ oldsong.title }}</h4>
-            <p class="text-center">{{ oldsong.description }}</p>
+            <div class="col-md-4 py-5">
+                <h2>{{ 'website.oldrepertoire'|trans }}</h2>
+            </div>
+            <div class="col-md-8 py-5">
+                {{ text_block('repertoire_old_intro') }}
+            </div>
         </div>
-    {% endfor %}
         </div>
     </div>
+    <section class="diagbg">
+        <div class="container py-4">
+            <div class="row">
+        {% for oldsong in oldrepertoire %}
+            <div class="oldrep col-sm-6 col-md-3 col-lg-2 mb-3">
+                <h4 class="text-center">{{ oldsong.title }}</h4>
+                <p class="text-center">{{ oldsong.description }}</p>
+            </div>
+        {% endfor %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

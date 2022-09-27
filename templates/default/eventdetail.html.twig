@@ -1,7 +1,7 @@
 {% if large is defined and large == true %}
-<div class="container concert-preview">
+<div class="container large-concert-preview mb-5">
 {% else %}
-<div class="col-md-6 concert-preview">
+<div class="col-md-6 concert-preview mb-4">
 {% endif %}
     <div class="row">
         <div class="col-md-4 eventimage">
@@ -11,7 +11,7 @@
                 {% endif %}
             </a>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 pt-2">
             <a href="{{ path('event', {'slug' : event.slug}) }}">
                 <p class="date">{{ event.date|format_datetime(pattern="dd/MM/yyyy") }}</p>
                 <p class="name">{{ event.name }}</p>

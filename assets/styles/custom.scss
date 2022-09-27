@@ -16,7 +16,7 @@ body.agenda {
         background-color: $color2;
     }
     .diagbg{
-        background-image: linear-gradient($color2, $white);
+        background-image: linear-gradient(to bottom right, $color2 50%, $white 50.1%);
     }
 }
 body.repertoire {
@@ -24,7 +24,7 @@ body.repertoire {
         background-color: $color3;
     }
     .diagbg{
-        background-image: linear-gradient($color3, $white);
+        background-image: linear-gradient(to bottom right, $color3 50%, $white 50.1%);
     }
 }
 body.membres {
@@ -32,7 +32,7 @@ body.membres {
         background-color: $color4;
     }
     .diagbg{
-        background-image: linear-gradient($color4, $white);
+        background-image: linear-gradient(to bottom right, $color4 50%, $white 50.1%);
     }
 }
 body.photos {
@@ -40,7 +40,7 @@ body.photos {
         background-color: $color5;
     }
     .diagbg{
-        background-image: linear-gradient($color5, $white);
+        background-image: linear-gradient(to bottom right, $color5 50%, $white 50.1%);
     }
 }
 body.contact {
@@ -48,7 +48,7 @@ body.contact {
         background-color: $color6;
     }
     .diagbg{
-        background-image: linear-gradient($color6, $white);
+        background-image: linear-gradient(to bottom right, $color6 50%, $white 50.1%);
     }
 }
 body.joinus {
@@ -56,7 +56,15 @@ body.joinus {
         background-color: $color7;
     }
     .diagbg{
-        background-image: linear-gradient($color7, $white);
+        background-image: linear-gradient(to bottom right, $color7 50%, $white 50.1%);
+    }
+}
+body.event{
+    .bgcolor{
+        background-color: $color8;
+    }
+    .diagbg{
+        background-image: linear-gradient(to bottom right, $color8 50%, $white 50.1%);
     }
 }
 
@@ -96,24 +104,24 @@ h1, h2, h3, h4, h5, h6{
 // Menu //
 
 nav.navbar{
-    padding: 0 20px 0 0;
     .navbar-collapse{
         .nav-link{
             color:$white;
-            display: inline-block;
-            height: 120px;
+            display: block;
+            height: 50px;
             margin: 0;
-            padding-left: 20px;
-            padding-right: 20px;
+            padding-left: 10px;
+            padding-right: 10px;
             font-size: 1.2em;
-            line-height: 100px;
+            line-height: 35px;
             &:hover, &:visited, &:active{
                 color:$white;
                 text-decoration: underline;
             }
             &.active{
                 color: $white;
-                border-bottom: 3px solid $white;
+                border-bottom: 1px solid $white;
+                border-top: 1px solid $white;
             }
         }
     }
@@ -129,7 +137,6 @@ nav.navbar{
         margin: 0 20px 0 40px;
         padding-top: 10px;
     }
-
     .navbar-text{
         a{
             font-size: 1.5em;
@@ -142,8 +149,42 @@ nav.navbar{
             padding-left: 10px;
         }
     }
+    .navbar-toggler{
+        margin-right: 20px;
+    }
 
     border-bottom: 1px solid $white;
+}
+
+@include media-breakpoint-up(sm) {
+    nav.navbar{
+        padding: 0 20px 0 0;
+        .navbar-collapse{
+            .nav-link{
+                display: inline-block;
+                height: 120px;
+                padding-left: 20px;
+                padding-right: 20px;
+                line-height: 100px;
+                &.active{
+                    color: $white;
+                    border-bottom: 3px solid $white;
+                    border-top-style: none;
+                }
+            }
+        }
+    }
+}
+
+
+// Pages //
+
+.pageintro{
+    color: $white;
+
+    p{
+        font-size: 1.2em;
+    }
 }
 
 // Homepage //
@@ -169,6 +210,31 @@ nav.navbar{
 
 // Concerts // 
 
+.large-concert-preview{
+    font-size: 1.3em;
+    a{
+        color: $black;
+        text-decoration: none;
+        &:hover, &:visited, &:active{
+            color: $black;
+        }
+        &:hover{
+            .name{
+                text-decoration: underline;
+            }
+        }
+    }
+    .date{
+        margin-bottom: 0.2rem;
+    }
+    .name{
+        font-family: $headings-font-family;
+    }
+    .place{
+        font-size: 0.8em;
+    }
+}
+
 .concert-preview{
     a{
         color: $black;
@@ -192,6 +258,13 @@ nav.navbar{
         font-size: 0.8rem;
     }
 }
+.season{
+    font-family: $font-family-sans-serif;
+    font-size: 1em;
+}
+
+
+// Footer //
 
 footer{
     border-top: 1px solid $white;

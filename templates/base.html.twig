@@ -15,7 +15,7 @@
         {% endblock %}
     </head>
     {% block bodytag %}<body>{% endblock %}
-        <nav class="navbar navbar-expand-sm navbar-light bgcolor" aria-label="Main menu">
+        <nav class="navbar navbar-expand-sm navbar-dark bgcolor" aria-label="Main menu">
             <a class="navbar-brand" href="{{ path('homepage') }}">{{ 'website.title'|trans }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse" id="mainMenu">
                 {{ knp_menu_render('main',{'currentClass' : 'active'}) }}
             </div>
-            <span class="navbar-text">
+            <span class="navbar-text d-none d-sm-block">
                 <a href="https://www.facebook.com/Zinnechoeur"><i class="fab fa-facebook"></i></a> 
                 <a href="https://www.instagram.com/zinne.choeur"><i class="fab fa-instagram"></i></a> 
                 <a href="https://www.youtube.com/channel/UC_tp-m7g0eqs0IwxhA1k9mA"><i class="fab fa-youtube"></i></a>
