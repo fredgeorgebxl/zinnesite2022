@@ -5,31 +5,46 @@
 <meta property="og:title" content="{{ 'website.membres'|trans }}" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{ absolute_url(path('membres')) }}" />
-<meta property="og:image" content="{# absolute_url(asset('images/og-default.jpg')) #}" />
+<meta property="og:image" content="{{ absolute_url(asset('build/images/og-default.jpg')) }}" />
 {% endblock %}
 {% block bodytag %}<body class="membres">{% endblock %}
 {% block body %}
-<div class="container">
-    {% if chef is defined and chef is not null %}
-    <div class="chef row bgcolor">
-        <div class="col-md-6 col-lg-4">
-            {{ cropped_image(chef.picture, 'site_user_square') }}
-        </div>
-        <div class="col-md-6 col-lg-8">
-            <h2>{{ chef.firstname }} {{ chef.lastname }}{{ 'website.chef'|trans }}</h2>
-            {{ text_block('chef_description') }}
+
+{% if chef is defined and chef is not null %}
+<section class="chef bgcolor py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                {{ cropped_image(chef.picture, 'site_user_square') }}
+            </div>
+            <div class="col-md-6 col-lg-8">
+                <h2>{{ chef.firstname }} {{ chef.lastname }}{{ 'website.chef'|trans }}</h2>
+                {{ text_block('chef_description') }}
+            </div>
         </div>
     </div>
-    {% endif %}
-    <h2>{{ 'website.choristes'|trans }}</h2>
-    <div class="row">
-    {% for member in members %}
-        <div class="membre col-sm-6 col-md-4 col-lg-3">
-            <h3>{{ member.firstname }}</h3>
-            <div class="picture">{{ cropped_image(member.picture, 'site_user_square') }}</div>
-            <div class="voice {{ member.voice }}">{{ ('website.'~member.voice)|trans }}</div>
+</section>
+{% endif %}
+<section class="choristes py-5 diagbg">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-6"><h2>{{ 'website.choristes'|trans }}</h2></div>
+            <div class="col-md-6"><div class="legend"><span><i class="fas fa-cat"></i> {{ 'website.sopr'|trans }}</span><span><i class="fas fa-otter"></i> {{ 'website.alto'|trans }}</span><span><i class="fas fa-dog"></i> {{ 'website.teno'|trans }}</span><span><i class="fas fa-hippo"></i> {{ 'website.bass'|trans }}</span></div></div>
         </div>
-    {% endfor %}
+        <div class="row">
+        {% for member in members %}
+            <div class="membre col-sm-6 col-md-4 col-lg-3 mb-4">
+                <h3>{{ member.firstname }}</h3>
+                <div class="picture"><div class="shader"></div>{{ cropped_image(member.picture, 'site_user_square') }}</div>
+                <div class="voice {{ member.voice }}">
+                    {% if member.voice == 'sopr' %}<i class="fas fa-cat"></i>{% endif %}
+                    {% if member.voice == 'teno' %}<i class="fas fa-dog"></i>{% endif %}
+                    {% if member.voice == 'alto' %}<i class="fas fa-otter"></i>{% endif %}
+                    {% if member.voice == 'bass' %}<i class="fas fa-hippo"></i>{% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        </div>
     </div>
-</div>
+</section>
 {% endblock %}
