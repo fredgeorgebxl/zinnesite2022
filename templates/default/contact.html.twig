@@ -12,27 +12,35 @@
 {% endblock %}
 {% block bodytag %}<body class="contact">{% endblock %}
 {% block body %}
-    <div class="bgcolor">
+    <div class="pageintro bgcolor">
         <div class="container">
-            <h1>{{ 'website.contact'|trans }}</h1>
-            {{ text_block('contact_intro') }}
+            <div class="row">
+                <div class="col-md-4 pt-5">
+                    <h1>{{ 'website.contact'|trans }}</h1>
+                </div>
+                <div class="col-md-8 py-5">
+                    {{ text_block('contact_intro') }}
+                </div>
+            </div>
         </div>
     </div>
-    <div class="container">
-        {% if messagesent is defined and messagesent is not null %}
-            {% if messagesent == 1 %}
-                <div class="callout success large">{{ 'website.contactform.sendconfirm'|trans }}</div>
+    <section class="diagbg">
+        <div class="container py-4">
+            {% if messagesent is defined and messagesent is not null %}
+                {% if messagesent == 1 %}
+                    <div class="callout success large">{{ 'website.contactform.sendconfirm'|trans }}</div>
+                {% else %}
+                    <div class="callout alert large">{{ 'website.contactform.senderror'|trans }}</div>
+                {% endif %}
             {% else %}
-                <div class="callout alert large">{{ 'website.contactform.senderror'|trans }}</div>
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.information) }}
+            {{ form_row(form.subject) }}
+            {{ form_row(form.message) }}
+            {{ form_widget(form.email, {attr: {style: 'display:none !important', tabindex: '-1', autocomplete: 'off', ref: 'initHoneyPot'}}) }}
+            {{ form_end(form) }}
             {% endif %}
-        {% else %}
-        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.information) }}
-        {{ form_row(form.subject) }}
-        {{ form_row(form.message) }}
-        {{ form_widget(form.email, {attr: {style: 'display:none !important', tabindex: '-1', autocomplete: 'off', ref: 'initHoneyPot'}}) }}
-        {{ form_end(form) }}
-        {% endif %}
-    </div>    
+        </div>
+    </section>
 {% endblock %}

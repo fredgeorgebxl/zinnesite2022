@@ -14,19 +14,26 @@
 <meta property="og:image" content="{{ absolute_url(asset('build/images/og-default.jpg')) }}" />
 {% endif %}
 {% endblock %}
+{% block bodytag %}<body class="gallery-detail">{% endblock %}
 {% block body %}
-    <div class="gallery-detail">
+    <div class="pageintro bgcolor py-4">
         <div class="container">
-            <h1>{{ gallery.title }}</h1>
-            <div class="dates">{{ macros.dateRange(gallery.date, gallery.dateto) }}</div>
-            {% if gallery.description is not empty %}
-            <p>{{ gallery.description }}</p>
-            {% endif %}
-        </div>
-        <div class="pictures gallery">
-        {% for image in gallery.pictures %}
-                <a href="{{ asset(images_directory ~ image.path) }}">{{ cropped_image(image, 'site_image_preview') }}</a>
-        {% endfor %}
+            <div class="row">
+                <div class="col-md-4 pt-5">
+                    <h1>{{ gallery.title }}</h1>
+                </div>
+                <div class="col-md-8 py-5">
+                    <div class="dates">{{ macros.dateRange(gallery.date, gallery.dateto) }}</div>
+                    {% if gallery.description is not empty %}
+                        <p>{{ gallery.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
+    <section class="diagbg py-4">
+        <div class="pictures gallery">
+        {% for image in gallery.pictures %}<a href="{{ asset(images_directory ~ image.path) }}">{{ cropped_image(image, 'site_image_preview') }}</a>{% endfor %}
+        </div>
+    </section>
 {% endblock %}

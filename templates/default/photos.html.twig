@@ -12,31 +12,41 @@
 {% endblock %}
 {% block bodytag %}<body class="photos">{% endblock %}
 {% block body %}
-    <div class="container">
-        <div class="bgcolor">
-            <h1>{{ 'website.photos'|trans }}</h1>
-            {{ text_block('photos_intro') }}
-        </div>
-        <div class="row">
-        {% for gallery in galleries %}
-            {% if gallery.pictures|length %}
-            <div class="col-md-6">
-                <a href="{{ path('gallery', {'slug': gallery.slug}) }}">
-                    <div class="gallery-intro row">
-                        <div class="col-md-4 galleryfront">
-                            {% if gallery.pictures[0] is defined %}
-                                {{ cropped_image(gallery.pictures[0], 'site_gallery_preview') }}
-                            {% endif %}
-                        </div>
-                        <div class="col-md-8">
-                            <h2>{{ gallery.title }}</h2>
-                            <div class="dates">{{ macros.dateRange(gallery.date, gallery.dateto) }}</div>
-                        </div>
-                    </div>
-                </a>
+    <section class="pageintro bgcolor py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <h1>{{ 'website.photos'|trans }}</h1>
+                </div>
+                <div class="col-md-6 col-lg-8">
+                    {{ text_block('photos_intro') }}
+                </div>
             </div>
-            {% endif %}
-        {% endfor %}
         </div>
-    </div>
+    </section>
+    <section class="galleries py-5 diagbg">
+        <div class="container">
+            <div class="row">
+            {% for gallery in galleries %}
+                {% if gallery.pictures|length %}
+                <div class="col-md-6 my-3">
+                    <a href="{{ path('gallery', {'slug': gallery.slug}) }}">
+                        <div class="gallery-intro row">
+                            <div class="col-md-4 galleryfront">
+                                {% if gallery.pictures[0] is defined %}
+                                    {{ cropped_image(gallery.pictures[0], 'site_gallery_preview') }}
+                                {% endif %}
+                            </div>
+                            <div class="col-md-8">
+                                <h2>{{ gallery.title }}</h2>
+                                <div class="dates">{{ macros.dateRange(gallery.date, gallery.dateto) }}</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

@@ -50,6 +50,19 @@ body.contact {
     .diagbg{
         background-image: linear-gradient(to bottom right, $color6 50%, $white 50.1%);
     }
+    .btn-primary{
+        background-color: $color6;
+        border: 1px solid $color6;
+        &:hover{
+            background-color: darken($color6, 5);
+        }
+        &:focus{
+            border: 2px solid darken($color6, 5);
+        }
+    }
+    .invalid-feedback{
+        color: $black;
+    }
 }
 body.joinus {
     .bgcolor{
@@ -67,7 +80,14 @@ body.event{
         background-image: linear-gradient(to bottom right, $color8 50%, $white 50.1%);
     }
 }
-
+body.gallery-detail{
+    .bgcolor{
+        background-color: $color9;
+    }
+    .diagbg{
+        background-image: linear-gradient(to bottom right, $color9 50%, $white 50.1%);
+    }
+}
 .diagbg, .diagbg-reverse{
     background-size: 100% 600px;
     background-repeat: no-repeat;
@@ -193,6 +213,13 @@ nav.navbar{
     p{
         font-size: 1.2em;
     }
+
+    a{
+        color: $white;
+        &:hover{
+            color: darken($white, 5);
+        }
+    }
 }
 
 // Homepage //
@@ -202,7 +229,7 @@ nav.navbar{
     text-align: center;
     padding: 4rem 0;
 }
-.contact{
+.homepage .contact{
     color: $white;
     padding: 4rem 0;
     .btn{
@@ -317,6 +344,37 @@ nav.navbar{
         z-index: 95;
       }
 }
+
+// Photo galleries //
+
+.galleries{
+    a{
+        color: $black;
+        text-decoration: none;
+        &:hover, &:visited, &:active{
+            color: $black;
+        }
+        &:hover{
+            .name{
+                text-decoration: underline;
+            }
+        }
+    }
+    h2{
+        font-size: 1.2rem;
+    }
+    .dates{
+        font-size: 0.8rem;
+    }
+}
+.gallery-detail{
+    .pageintro{
+        .dates{
+            font-family: $headings-font-family;
+        }
+    }
+}
+
 
 // Footer //
 
