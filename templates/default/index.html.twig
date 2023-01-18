@@ -45,8 +45,10 @@
                 <div class="col-md-3"><a href="{{ path('photos') }}" class="btn btn btn-outline-secondary">{{ 'website.viewmore'|trans }}</a></div>
             </div>
         </div>
-        <div class="hp-images gallery">
-            {% for picture in pictures %}<a href="{{ asset(images_directory ~ picture.path) }}">{{ cropped_image(picture, 'site_image_preview') }}</a>{% endfor %}
+        <div class="hp-images-container">
+            <div class="hp-images gallery">
+                {% for picture in pictures %}<a href="{{ asset(images_directory ~ picture.path) }}">{{ cropped_image(picture, 'site_image_preview') }}</a>{% endfor %}
+            </div>
         </div>
         {% endif %}
     </section>

@@ -59,7 +59,7 @@ class DefaultController extends AbstractController
                 ->getResult();
 
         $response = new Response(
-            $this->render('default/index.html.twig', [
+            $this->renderView('default/index.html.twig', [
                 'controller_name' => 'DefaultController',
                 'homeslide' => $homeslide,
                 'nextconcerts' => $nextconcerts,
