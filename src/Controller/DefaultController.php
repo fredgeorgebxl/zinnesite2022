@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\HomeSlide;
 use App\Entity\Event;
 use App\Entity\Image;
+use App\Security\SpamChecker;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
@@ -188,11 +189,12 @@ class DefaultController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function contactAction(Request $request, MailerInterface $mailer)
+    public function contactAction(Request $request, MailerInterface $mailer, SpamChecker $spamChecker)
     {
         $form = $this->createForm(\App\Form\Type\ContactType::class);
         $form->handleRequest($request);
         $messagesent = NULL;
+        $is_spam = NULL;
         
         if($form->isSubmitted() &&  $form->isValid()){
             $name = $form['name']->getData();
@@ -202,22 +204,36 @@ class DefaultController extends AbstractController
             $honeypot = $form['email']->getData();
             
             if ($honeypot === NULL || $honeypot->trim()->isEmpty()){
-                $email = (new Email())
-                ->to()
-                ->subject($subject)
-                ->replyTo($email)
-                ->html($this->renderView('mails/contactmail.html.twig',array('name' => $name, 'email' => $email, 'message' => $message)),'text/html');
-            
-                $messagesent = TRUE;
-                try {
-                    $mailer->send($email);
-                }  catch (TransportExceptionInterface $e) {
+                // Check for spam
+                $context = [
+                    'user_ip' => $request->getClientIp(),
+                    'user_agent' => $request->headers->get('user-agent'),
+                    'referrer' => $request->headers->get('referer'),
+                    'permalink' => $request->getUri(),
+                ];
+                $spamTest = $spamChecker->getSpamScore(array('author' => $name, 'email' => $email, 'content' => $message), $context);
+                if($spamTest === 1 || $spamTest === 2){
                     $messagesent = FALSE;
+                    $is_spam = TRUE;
+                } else {
+                    $email = (new Email())
+                    ->to()
+                    ->subject($subject)
+                    ->replyTo($email)
+                    ->html($this->renderView('mails/contactmail.html.twig',array('name' => $name, 'email' => $email, 'message' => $message)),'text/html');
+                
+                    $messagesent = TRUE;
+                    try {
+                        $mailer->send($email);
+                    }  catch (TransportExceptionInterface $e) {
+                        $messagesent = FALSE;
+                        $is_spam = FALSE;
+                    }
                 }
             }
         }
         
-        return $this->render('default/contact.html.twig', ['form' => $form->createView(), 'messagesent' => $messagesent]);
+        return $this->render('default/contact.html.twig', ['form' => $form->createView(), 'messagesent' => $messagesent, 'is_spam' => $is_spam]);
     }
 
     /**

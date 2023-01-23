@@ -3,6 +3,6 @@ framework:
         dsn: '%env(MAILER_DSN)%'
         envelope:
             sender: 'info@zinnechoeur.be'
-            recipients: ['freddgeorge@gmail.com']
+            recipients: ['zinnecomite@googlegroups.com']
         headers:
             From: 'Info <info@zinnechoeur.be>'

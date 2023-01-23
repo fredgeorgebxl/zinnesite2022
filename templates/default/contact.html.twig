@@ -29,6 +29,8 @@
             {% if messagesent is defined and messagesent is not null %}
                 {% if messagesent == 1 %}
                     <div class="callout success large">{{ 'website.contactform.sendconfirm'|trans }}</div>
+                {% elseif is_spam == 1 %}
+                    <div class="callout alert large">{{ 'website.contactform.spam'|trans }}</div>
                 {% else %}
                     <div class="callout alert large">{{ 'website.contactform.senderror'|trans }}</div>
                 {% endif %}
