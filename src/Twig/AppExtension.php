@@ -58,8 +58,12 @@ class AppExtension extends AbstractExtension
     }
     
     public function embedYoutubeVideo(Environment $environment, $url){
+        // Get the Youtube ID from the URL
+        preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user|shorts)\/))([^\?&\"'>]+)/", $url, $matches);
+        $youtube_id = $matches[1];
+        
         return $environment->render('default/video.html.twig', [
-           'url' => $url, 
+           'video_id' => $youtube_id, 
         ]);
     }
     

@@ -276,10 +276,20 @@ class GalleryController extends AbstractController
      * 
      * @IsGranted("ROLE_ADMIN")
      */
-    public function deleteAction($ent_id){
+    public function deleteAction($ent_id, ImageManager $imageManager){
 
         $em = $this->getDoctrine()->getManager();
         $gallery = $em->getRepository(Gallery::class)->find($ent_id);
+
+        // remove all images
+        $images = $gallery->getPictures();
+        
+        foreach ($images as $image) {
+            $gallery->removePicture($image);
+            $imageManager->deletePictureFiles('/images', $image);
+            $em->remove($image);
+        }
+
         $em->remove($gallery);
         $em->flush();
         
