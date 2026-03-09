@@ -5,10 +5,12 @@ body.homepage {
         background-color: $color1;
     }
     .diagbg-reverse{
-        background-image: linear-gradient(to top left, $color1 50%, $white 50.1%);
+        //background-image: linear-gradient(to top left, $color1 50%, $white 50.1%);
+        background-color: $white;
     }
     .diagbg{
-        background-image: linear-gradient(to bottom right, $color1 50%, $white 50.1%);
+        //background-image: linear-gradient(to bottom right, $color1 50%, $white 50.1%);
+        background-color: $white;
     }
 }
 body.agenda {
@@ -16,7 +18,8 @@ body.agenda {
         background-color: $color2;
     }
     .diagbg{
-        background-image: linear-gradient(to bottom right, $color2 50%, $white 50.1%);
+        //background-image: linear-gradient(to bottom right, $color2 50%, $white 50.1%);
+        background-color: $white;
     }
 }
 body.repertoire {
@@ -24,7 +27,8 @@ body.repertoire {
         background-color: $color3;
     }
     .diagbg{
-        background-image: linear-gradient(to bottom right, $color3 50%, $white 50.1%);
+        //background-image: linear-gradient(to bottom right, $color3 50%, $white 50.1%);
+        background-color: $white;
     }
 }
 body.membres {
@@ -32,7 +36,8 @@ body.membres {
         background-color: $color4;
     }
     .diagbg{
-        background-image: linear-gradient(to bottom right, $color4 50%, $white 50.1%);
+        //background-image: linear-gradient(to bottom right, $color4 50%, $white 50.1%);
+        background-color: $white;
     }
 }
 body.photos {
@@ -40,7 +45,8 @@ body.photos {
         background-color: $color5;
     }
     .diagbg{
-        background-image: linear-gradient(to bottom right, $color5 50%, $white 50.1%);
+        //background-image: linear-gradient(to bottom right, $color5 50%, $white 50.1%);
+        background-color: $white;
     }
 }
 body.contact {
@@ -48,7 +54,8 @@ body.contact {
         background-color: $color6;
     }
     .diagbg{
-        background-image: linear-gradient(to bottom right, $color6 50%, $white 50.1%);
+        //background-image: linear-gradient(to bottom right, $color6 50%, $white 50.1%);
+        background-color: $white;
     }
     .btn-primary{
         background-color: $color6;
@@ -69,7 +76,8 @@ body.joinus {
         background-color: $color7;
     }
     .diagbg{
-        background-image: linear-gradient(to bottom right, $color7 50%, $white 50.1%);
+        //background-image: linear-gradient(to bottom right, $color7 50%, $white 50.1%);
+        background-color: $white;
     }
 }
 body.event{
@@ -77,7 +85,8 @@ body.event{
         background-color: $color8;
     }
     .diagbg{
-        background-image: linear-gradient(to bottom right, $color8 50%, $white 50.1%);
+        //background-image: linear-gradient(to bottom right, $color8 50%, $white 50.1%);
+        background-color: $white;
     }
 }
 body.gallery-detail{
@@ -85,9 +94,11 @@ body.gallery-detail{
         background-color: $color9;
     }
     .diagbg{
-        background-image: linear-gradient(to bottom right, $color9 50%, $white 50.1%);
+        //background-image: linear-gradient(to bottom right, $color9 50%, $white 50.1%);
+        background-color: $white;
     }
 }
+/*
 .diagbg, .diagbg-reverse{
     background-size: 100% 600px;
     background-repeat: no-repeat;
@@ -98,6 +109,7 @@ body.gallery-detail{
 .diagbg-reverse{
     background-position: bottom;
 }
+    */
 .btn{
     border-radius: 0;
     min-width: 250px;
@@ -155,12 +167,12 @@ nav.navbar{
     }
     .navbar-brand{
         display: inline-block;
-        background-image: url('../images/main-hp-logo.png');
+        background-image: url('../images/logo_site.svg');
         background-repeat: no-repeat;
         background-position: center;
         background-size: 100%;
-        width: 100px;
-        height: 100px;
+        width: 250px;
+        height: 70px;
         text-indent: -2000px;
         margin: 0 20px 0 40px;
         padding-top: 10px;

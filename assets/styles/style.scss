@@ -13,20 +13,30 @@
     font-style: normal;
 }
 
-$primary: #03c997;
-$danger: #f8554d;
-$color1: #4CD8B6;
-$color2: #FF5BAA;
-$color3: #4C97DC;
-$color4: #FA6F44;
-$color5: #33D043;
-$color6: #F14156;
-$color7: #26D1DC;
-$color8: #FDCA17;
-$color9: #A670DC;
+@font-face {
+  font-family: 'hoss';
+  src: url('../fonts/hoss-round-x-narrow-bold-italic-font.woff2') format('woff2'),
+       url('../fonts/hoss-round-x-narrow-bold-italic-font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+$primary: #15182e;
+$white: #fffdf7;
+$danger: #f6921e;
+$color1: #15182e;
+$color2: #f998d4;
+$color3: #ff0000;
+$color4: #ffcc00;
+$color5: #8bc53f;
+$color6: #8ccfec;
+$color7: #8ccfec;
+$color8: #ffcc00;
+$color9: #f998d4;
 
 $font-family-sans-serif: arimoregular, sans-serif;
-$headings-font-family: arimobold, sans-serif;
+$headings-font-family: hoss, sans-serif;
 
 @import "~bootstrap/scss/bootstrap";
 
